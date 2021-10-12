@@ -78,10 +78,13 @@ exports.setWebhook = function(botUrl) {
 // Now we get to the Holodex stuff
 
 function sendHolodexRequest(func, apiKey, data, callback) {
-    console.log(data);
-    var options = {
+    let fullFunc = func + "?channel_id=" + data.channel_id
+    if (data.excludeWaitingRooms) {
+        fullFunc += "&max_upcoming_hours=100"
+    }
+    const options = {
         hostname: 'holodex.net',
-        path: '/api/v2' + func,
+        path: '/api/v2' + fullFunc,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -102,16 +105,17 @@ function sendHolodexRequest(func, apiKey, data, callback) {
     req.end();
 }
 
-exports.getFutureVids = function(apiKey, channelId, excludeWaitingRooms) {
-    if (excludeWaitingRooms) {
+exports.getFutureVids = function(apiKey, channelId, noWaitingRooms) {
+    if (noWaitingRooms) {
         var apiRequest = {
             channel_id: channelId,
-            max_upcoming_hours: 100
+            excludeWaitingRooms: true
         }
     }
     else {
         var apiRequest = {
-            channel_id: channelId
+            channel_id: channelId,
+            excludeWaitingRooms: false
         }
     }
     return new Promise(function(resolve) {
