@@ -27,4 +27,14 @@
         "name": "IRyS",
         "channelId": "UC8rcEBzJSleTkf_-agPM20g"
     }
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "ollie"
+	],
+    "command_data": {
+        "name": "Ollie",
+        "channelId": "UCYz_5n-uDuChHtLo7My1HnQ"
+    }
 }]
