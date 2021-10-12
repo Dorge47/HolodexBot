@@ -220,7 +220,7 @@ async function processCommand(command, message) {
                 }
             }
             if (!currentlyLive) {
-                bot.sendReply(message.chat.id, (command.command_data.name + " has " + holodexData.length + " upcoming" + ((holodexData.length - 1) ? "streams. Here's the first one:" : "stream. Here it is:")), message.message_id);
+                bot.sendReply(message.chat.id, (command.command_data.name + " has " + holodexData.length + " upcoming " + ((holodexData.length - 1) ? "streams. Here's the first one:" : "stream. Here it is:")), message.message_id);
                 setTimeout(function(){bot.sendReply(message.chat.id, ("https://youtu.be/" + holodexData[0].id), message.message_id)}, 300);
             }
             else {
