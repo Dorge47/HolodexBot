@@ -17,4 +17,14 @@
     "command_names": [
         "graduate"
 	]
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "irys"
+	],
+    "command_data": {
+        "name": "IRyS",
+        "channelId": "UC8rcEBzJSleTkf_-agPM20g"
+    }
 }]

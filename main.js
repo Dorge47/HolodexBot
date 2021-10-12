@@ -185,7 +185,7 @@ function doUptime(msg) {
     bot.sendReply(msg.chat.id, "I've been working for "+hours+':'+minutes+':'+seconds, msg.msg_id);
 }
 
-function processCommand(command, message) {
+async function processCommand(command, message) {
     if (command.requires_admin) {
         if (!isAdmin(message)) {
             bot.sendreply(message.chat.id, "You are unauthorized to access this command. For more information, contact @Dorge47", message.message_id);
@@ -203,7 +203,12 @@ function processCommand(command, message) {
                 command.command_data.link, message.message_id,
                 command.command_data.disablePreview);
             break;
-            
+        case 7:
+            let holoDat = await bot.getFutureVids(holoAPIKey, command.command_data.channelId, true);
+            holodexData = JSON.parse(holoDat);
+            console.log(JSON.stringify(holodexData));
+            break;
+        
         //Hardcoded commands
         //Help
         case 257:

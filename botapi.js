@@ -76,3 +76,47 @@ exports.setWebhook = function(botUrl) {
 }
 
 // Now we get to the Holodex stuff
+
+function sendHolodexRequest(func, apiKey, data, callback) {
+    var options = {
+        hostname: 'https://holodex.net/api/v2',
+        path: func,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-APIKEY': apiKey
+        },
+    };
+    var req = https.request(options, (resp) => {
+        let data = '';
+        resp.on('data', (chunk) => data += chunk);
+        resp.on('end', () => {
+            //Call the callback with the data
+            callback(data);
+        });
+    }).on('error', (err) => {
+        console.log("Error sending request: " + err.message);
+    });
+    req.write(JSON.stringify(data));
+    req.end();
+}
+
+exports.getFutureVids = function(apiKey, channelId, excludeWaitingRooms) {
+    if (excludeWaitingRooms) {
+        var apiRequest = {
+            channel_id: channelId,
+            max_upcoming_hours: 100
+        }
+    }
+    else {
+        var apiRequest = {
+            channel_id: channelId
+        }
+    }
+    return new Promise(function(resolve) {
+        sendHolodexRequest("/live", apiKey, apiRequest, function(data) {
+            var holodexResponse = data;
+            resolve(data);
+        });
+    });
+}
