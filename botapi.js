@@ -79,8 +79,8 @@ exports.setWebhook = function(botUrl) {
 
 function sendHolodexRequest(func, apiKey, data, callback) {
     var options = {
-        hostname: 'holodex.net/api/v2',
-        path: func,
+        hostname: 'holodex.net',
+        path: '/api/v2' + func,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
