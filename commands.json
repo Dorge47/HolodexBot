@@ -51,7 +51,7 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "ollie"
+        "gura"
 	],
     "command_data": {
         "name": "Gura",
