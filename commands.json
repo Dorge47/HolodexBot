@@ -18,6 +18,15 @@
         "graduate"
 	]
 }, {
+    "requires_admin": true,
+    "command_type": 260,
+    "command_names": [
+        "refresh commands"
+    ],
+    "command_data": {
+        "replyText": "The command array has been refreshed"
+    }
+}, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
