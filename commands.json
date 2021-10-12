@@ -128,4 +128,14 @@
         "name": "Gura",
         "channelId": "UCoSrY_IQQVpmIRZ9Xf-y93g"
     }
+} , {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "uto"
+	],
+    "command_data": {
+        "name": "Uto",
+        "channelId": "UCdYR5Oyz8Q4g0ZmB4PkTD7g/about"
+    }
 }]
