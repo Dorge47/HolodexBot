@@ -31,6 +31,58 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
+        "sora"
+	],
+    "command_data": {
+        "name": "Sora",
+        "channelId": "UCp6993wxpyDPHUpavwDFqgg"
+    }
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "roboco"
+	],
+    "command_data": {
+        "name": "Roboco",
+        "channelId": "UCDqI2jOz0weumE8s7paEk6g"
+    }
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "miko"
+	],
+    "command_data": {
+        "name": "Miko",
+        "channelId": "UC-hM6YJuNYVAmUWxeIr9FeA"
+    }
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "suisei",
+        "suichan",
+        "sui chan"
+	],
+    "command_data": {
+        "name": "Suisei",
+        "channelId": "UC5CwaMl1eIgY8h02uZw7u8A"
+    }
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "azki"
+	],
+    "command_data": {
+        "name": "AZKi",
+        "channelId": "UC0TXe_LYZ4scaW2XMyi5_kw"
+    }
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
         "ollie"
 	],
     "command_data": {
