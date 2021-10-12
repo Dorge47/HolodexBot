@@ -2,7 +2,7 @@ var fs = require('fs');
 const DORGE = 440753792;
 const FUJI = 532735068;
 const DEBUGCHANNEL = -1001397346553;
-const admins = [DORGE47];
+const admins = [DORGE];
 const holoAPIKey = JSON.parse(fs.readFileSync("/home/pi/Hololive/apikey"));
 const identifiers = [
     "hb",
