@@ -206,7 +206,27 @@ async function processCommand(command, message) {
         case 7:
             let holoDat = await bot.getFutureVids(holoAPIKey, command.command_data.channelId, true);
             holodexData = JSON.parse(holoDat);
-            console.log(JSON.stringify(holodexData));
+            if (holodexData.length == 0) {
+                bot.sendReply(message.chat.id, (command.command_data.name + " has no streams scheduled right now."), message.message_id);
+                break;
+            }
+            let currentlyLive = false;
+            let livestreamIndex = null;
+            for (let i = 0; i < holodexData.length; i++) {
+                if (holodexData[i].status == "live") {
+                    livestreamIndex = i;
+                    currentlyLive = true;
+                    bot.sendReply(message.chat.id, (command.command_data.name + " is live right now!"), message.message_id);
+                }
+            }
+            if (!currentlyLive) {
+                bot.sendReply(message.chat.id, (command.command_data.name + " has " + holodexData.length + " upcoming" + ((holodexData.length - 1) ? "streams. Here's the first one:" : "stream. Here it is:")), message.message_id);
+                setTimeout(function(){bot.sendReply(message.chat.id, ("https://youtu.be/" + holodexData[0].id), message.message_id)}, 300);
+            }
+            else {
+                // Delay and list current livestreams
+                setTimeout(function(){bot.sendReply(message.chat.id, ("https://youtu.be/" + holodexData[i].id), message.message_id)}, 300);
+            }
             break;
         
         //Hardcoded commands

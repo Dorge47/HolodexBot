@@ -37,4 +37,24 @@
         "name": "Ollie",
         "channelId": "UCYz_5n-uDuChHtLo7My1HnQ"
     }
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "towa"
+	],
+    "command_data": {
+        "name": "Towa",
+        "channelId": "UC1uv2Oq6kNxgATlCiez59hw"
+    }
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "ollie"
+	],
+    "command_data": {
+        "name": "Gura",
+        "channelId": "UCoSrY_IQQVpmIRZ9Xf-y93g"
+    }
 }]
