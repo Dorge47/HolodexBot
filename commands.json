@@ -30,6 +30,16 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
+        "luna"
+	],
+    "command_data": {
+        "name": "Luna",
+        "channelId": "UCa9Y57gfeY0Zro_noHRVrnw"
+    }
+} , {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
         "irys"
 	],
     "command_data": {
