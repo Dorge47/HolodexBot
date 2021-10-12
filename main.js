@@ -225,7 +225,7 @@ async function processCommand(command, message) {
             }
             else {
                 // Delay and list current livestreams
-                setTimeout(function(){bot.sendReply(message.chat.id, ("https://youtu.be/" + holodexData[i].id), message.message_id)}, 300);
+                setTimeout(function(){bot.sendReply(message.chat.id, ("https://youtu.be/" + holodexData[livestreamIndex].id), message.message_id)}, 300);
             }
             break;
         
