@@ -1,0 +1,20 @@
+[{
+    "requires_admin": false,
+    "command_type": 0,
+    "command_names": [
+        "test"
+    ],
+    "command_data": "I'm working!"
+}, {
+    "requires_admin": false,
+    "command_type": 262,
+    "command_names": [
+        "uptime"
+	]
+}, {
+    "requires_admin": true,
+    "command_type": 257,
+    "command_names": [
+        "graduate"
+	]
+}]
