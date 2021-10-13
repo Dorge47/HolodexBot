@@ -30,52 +30,23 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "luna"
-	],
-    "command_data": {
-        "name": "Luna",
-        "channelId": "UCa9Y57gfeY0Zro_noHRVrnw"
-    }
-} , {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "irys"
-	],
-    "command_data": {
-        "name": "IRyS",
-        "channelId": "UC8rcEBzJSleTkf_-agPM20g"
-    }
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
         "sora"
 	],
-    "command_data": {
-        "name": "Sora",
-        "channelId": "UCp6993wxpyDPHUpavwDFqgg"
-    }
+    "command_data": 0
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "roboco"
 	],
-    "command_data": {
-        "name": "Roboco",
-        "channelId": "UCDqI2jOz0weumE8s7paEk6g"
-    }
+    "command_data": 1
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "miko"
 	],
-    "command_data": {
-        "name": "Miko",
-        "channelId": "UC-hM6YJuNYVAmUWxeIr9FeA"
-    }
+    "command_data": 2
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -84,66 +55,351 @@
         "suichan",
         "sui chan"
 	],
-    "command_data": {
-        "name": "Suisei",
-        "channelId": "UC5CwaMl1eIgY8h02uZw7u8A"
-    }
+    "command_data": 3
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "azki"
 	],
-    "command_data": {
-        "name": "AZKi",
-        "channelId": "UC0TXe_LYZ4scaW2XMyi5_kw"
-    }
-}, {
-    "requires_admin": false,
-    "command_type": 0,
-    "command_names": [
-        "coco",
-        "kaichou"
-    ],
-    "command_data": "Salute the fallen."
+    "command_data": 4
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "ollie"
+        "mel"
 	],
-    "command_data": {
-        "name": "Ollie",
-        "channelId": "UCYz_5n-uDuChHtLo7My1HnQ"
-    }
+    "command_data": 5
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "fubuki",
+        "fbk",
+        "friend"
+	],
+    "command_data": 6
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "matsuri"
+	],
+    "command_data": 7
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "aki",
+        "akirose"
+	],
+    "command_data": 8
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "haachama",
+        "haato"
+	],
+    "command_data": 9
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "aqua",
+        "baqua",
+        "onion"
+	],
+    "command_data": 10
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "shion",
+        "garlic"
+	],
+    "command_data": 11
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "ayame",
+        "yo dayo",
+        "yo dazo"
+	],
+    "command_data": 12
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "choco"
+	],
+    "command_data": 13
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "subaru",
+        "shuba",
+        "duck"
+	],
+    "command_data": 14
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "mio"
+	],
+    "command_data": 15
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "okayu"
+	],
+    "command_data": 16
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "korone"
+	],
+    "command_data": 17
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "pekora"
+	],
+    "command_data": 18
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "rushia"
+	],
+    "command_data": 19
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "flare"
+	],
+    "command_data": 20
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "noel",
+        "danchou"
+	],
+    "command_data": 21
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "marine",
+        "senchou"
+	],
+    "command_data": 22
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "kanata"
+	],
+    "command_data": 23
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "watame"
+	],
+    "command_data": 24
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "towa"
 	],
-    "command_data": {
-        "name": "Towa",
-        "channelId": "UC1uv2Oq6kNxgATlCiez59hw"
-    }
+    "command_data": 25
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "luna"
+	],
+    "command_data": 26
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "lamy"
+	],
+    "command_data": 28
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "nene"
+	],
+    "command_data": 29
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "botan"
+	],
+    "command_data": 30
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "polka",
+        "clown"
+	],
+    "command_data": 31
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "risu"
+	],
+    "command_data": 32
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "moona"
+	],
+    "command_data": 33
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "iofi",
+        "lofi"
+	],
+    "command_data": 34
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "ollie"
+	],
+    "command_data": 35
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "anya"
+	],
+    "command_data": 36
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "reine"
+	],
+    "command_data": 37
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "calli",
+        "callie"
+	],
+    "command_data": 38
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "kiara"
+	],
+    "command_data": 39
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "ina",
+        "wah"
+	],
+    "command_data": 40
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "gura"
 	],
-    "command_data": {
-        "name": "Gura",
-        "channelId": "UCoSrY_IQQVpmIRZ9Xf-y93g"
-    }
-} , {
+    "command_data": 41
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "ame",
+        "amelia",
+        "watson"
+	],
+    "command_data": 42
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "irys"
+	],
+    "command_data": 43
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "sana"
+	],
+    "command_data": 44
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "fauna",
+        "ceres"
+	],
+    "command_data": 45
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "kronii"
+	],
+    "command_data": 46
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "mumei"
+	],
+    "command_data": 47
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "bae",
+        "baelz",
+        "hakos"
+	],
+    "command_data": 48
+}, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "uto"
 	],
-    "command_data": {
-        "name": "Uto",
-        "channelId": "UCdYR5Oyz8Q4g0ZmB4PkTD7g"
-    }
+    "command_data": 49
+}, {
+    "requires_admin": false,
+    "command_type": 0,
+    "command_names": [
+        "coco",
+        "kaichou",
+        "aloe"
+    ],
+    "command_data": "Salute the fallen."
 }]

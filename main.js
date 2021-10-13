@@ -13,6 +13,7 @@ const identifiers = [
 var bot = require('./botapi.js');
 var fileCache = {};
 fileCache['commands'] = [];
+fileCache['ids'] = []
 var bootloaderData;
 exports.token = null;
 exports.name = "HolodexBot";
@@ -22,12 +23,17 @@ function loadCommands() {
     fileCache['commands'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/commands.json'));
 }
 
+function loadIDs() {
+    fileCache['ids'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/HoloIDs.json'));
+}
+
 exports.init = function(initData) {
     bootloaderData = initData;
     bootloaderData.initBotFunc(exports.directory);
     bot.setToken(exports.token);
     bot.sendMessage(DEBUGCHANNEL, "HolodexBot is ON");
     loadCommands();
+    loadIDs();
 }
 
 function forHolodexBot(msg) {
@@ -204,10 +210,11 @@ async function processCommand(command, message) {
                 command.command_data.disablePreview);
             break;
         case 7:
-            let holoDat = await bot.getFutureVids(holoAPIKey, command.command_data.channelId, true);
+            let memberData = fileCache['ids'][command.command_data];
+            let holoDat = await bot.getFutureVids(holoAPIKey, memberData.id, true);
             holodexData = JSON.parse(holoDat);
             if (holodexData.length == 0) {
-                bot.sendReply(message.chat.id, (command.command_data.name + " has no streams scheduled right now."), message.message_id);
+                bot.sendReply(message.chat.id, (memberData.name + " has no streams scheduled right now."), message.message_id);
                 break;
             }
             let currentlyLive = false;
@@ -216,11 +223,11 @@ async function processCommand(command, message) {
                 if (holodexData[i].status == "live") {
                     livestreamIndex = i;
                     currentlyLive = true;
-                    bot.sendReply(message.chat.id, (command.command_data.name + " is live right now!"), message.message_id);
+                    bot.sendReply(message.chat.id, (memberData.name + " is live right now!"), message.message_id);
                 }
             }
             if (!currentlyLive) {
-                bot.sendReply(message.chat.id, (command.command_data.name + " has " + holodexData.length + " upcoming " + ((holodexData.length - 1) ? "streams. Here's the first one:" : "stream. Here it is:")), message.message_id);
+                bot.sendReply(message.chat.id, (memberData.name + " has " + holodexData.length + " upcoming " + ((holodexData.length - 1) ? "streams. Here's the first one:" : "stream. Here it is:")), message.message_id);
                 setTimeout(function(){bot.sendReply(message.chat.id, ("https://youtu.be/" + holodexData[0].id), message.message_id)}, 300);
             }
             else {
