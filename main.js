@@ -176,7 +176,7 @@ function shutdown(msg) {
 }
 
 exports.onKill = function() {
-    bot.sendMessage(shutdownChatId, "matanene~~~~~~~", shutdownReplyId);
+    bot.sendMessage(shutdownChatId, "I'm die, thank you forever", shutdownReplyId);
     bot.sendMessage(DEBUGCHANNEL, "HolodexBot is OFF");
 }
 
