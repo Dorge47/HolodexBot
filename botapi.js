@@ -77,14 +77,11 @@ exports.setWebhook = function(botUrl) {
 
 // Now we get to the Holodex stuff
 
-function sendHolodexRequest(func, apiKey, data, callback) {
-    let fullFunc = func + "?channel_id=" + data.channel_id
-    if (data.excludeWaitingRooms) {
-        fullFunc += "&max_upcoming_hours=100"
-    }
+function sendHolodexRequest(func, apiKey, params, callback) {
+    let urlQuery = new URLSearchParams(params).toString();
     const options = {
         hostname: 'holodex.net',
-        path: '/api/v2' + fullFunc,
+        path: '/api/v2/' + func + "?" + urlQuery,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -92,34 +89,32 @@ function sendHolodexRequest(func, apiKey, data, callback) {
         },
     };
     var req = https.request(options, (resp) => {
-        let data = '';
-        resp.on('data', (chunk) => data += chunk);
+        let dataReceived = '';
+        resp.on('data', (chunk) => dataReceived += chunk);
         resp.on('end', () => {
             //Call the callback with the data
-            callback(data);
+            callback(dataReceived);
         });
     }).on('error', (err) => {
         console.log("Error sending request: " + err.message);
     });
-    req.write(JSON.stringify(data));
     req.end();
 }
 
-exports.getFutureVids = function(apiKey, channelId, noWaitingRooms) {
-    if (noWaitingRooms) {
+exports.getFutureVids = function(apiKey, channelId, excludeWaitingRooms) {
+    if (excludeWaitingRooms) {
         var apiRequest = {
-            channel_id: channelId,
-            excludeWaitingRooms: true
+            "channel_id": channelId,
+            "max_upcoming_hours": 100
         }
     }
     else {
         var apiRequest = {
-            channel_id: channelId,
-            excludeWaitingRooms: false
+            "channel_id": channelId
         }
     }
     return new Promise(function(resolve) {
-        sendHolodexRequest("/live", apiKey, apiRequest, function(data) {
+        sendHolodexRequest("live", apiKey, apiRequest, function(data) {
             var holodexResponse = data;
             resolve(data);
         });
