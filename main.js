@@ -224,6 +224,7 @@ async function processCommand(command, message) {
                     livestreamIndex = i;
                     currentlyLive = true;
                     bot.sendReply(message.chat.id, (memberData.name + " is live right now!"), message.message_id);
+                    break;
                 }
             }
             if (!currentlyLive) {
