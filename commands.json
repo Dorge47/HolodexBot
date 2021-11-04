@@ -406,7 +406,7 @@
     "requires_admin": true,
     "command_type": 8,
     "command_names": [
-        "TweetRyS"
+        "tweetrys"
     ],
     "command_data": 43
 }]
