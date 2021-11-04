@@ -101,6 +101,29 @@ function sendHolodexRequest(func, apiKey, params, callback) {
     req.end();
 }
 
+function sendTwitterRequest(func, apiKey, params, callback) {
+    let urlQuery = new URLSearchParams(params).toString();
+    const options = {
+        hostname: 'api.twitter.com',
+        path: '/2/' + func + "?" + urlQuery,
+        method: 'GET',
+        headers: {
+            'Authorization': "Bearer " + apiKey
+        }
+    }
+    var req = https.request(options, (resp) => {
+        let dataReceived = '';
+        resp.on('data', (chunk) => dataReceived += chunk);
+        resp.on('end', () => {
+            //Call the callback with the data
+            callback(dataReceived);
+        });
+    }).on('error', (err) => {
+        console.log("Error sending request: " + err.message);
+    });
+    req.end();
+}
+
 exports.getFutureVids = function(apiKey, channelId, excludeWaitingRooms) {
     if (excludeWaitingRooms) {
         var apiRequest = {
@@ -115,7 +138,31 @@ exports.getFutureVids = function(apiKey, channelId, excludeWaitingRooms) {
     }
     return new Promise(function(resolve) {
         sendHolodexRequest("live", apiKey, apiRequest, function(data) {
-            var holodexResponse = data;
+            resolve(data);
+        });
+    });
+}
+
+exports.getTweets = function(apiKey, twitterId, exclusions) {
+    var apiRequest = {
+        "max_results": 5
+    };
+    switch (exclusions) {
+        case 1:
+            apiRequest.exclude = "retweets";
+            break;
+        case 2:
+            apiRequest.exclude = "replies";
+            break;
+        case 3:
+            apiRequest.exclude = "retweets,replies";
+            break;
+        default:
+            break;
+        
+    }
+    return new Promise(function(resolve) {
+        sendTwitterRequest("users/" + twitterId + "/tweets", apiKey, apiRequest, function(data) {
             resolve(data);
         });
     });

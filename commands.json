@@ -402,4 +402,11 @@
         "aloe"
     ],
     "command_data": "Salute the fallen."
+}, {
+    "requires_admin": true,
+    "command_type": 8,
+    "command_names": [
+        "TweetRyS"
+    ],
+    "command_data": 43
 }]

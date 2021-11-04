@@ -4,6 +4,7 @@ const FUJI = 532735068;
 const DEBUGCHANNEL = -1001397346553;
 const admins = [DORGE];
 const holoAPIKey = JSON.parse(fs.readFileSync("/home/pi/Hololive/apikey"));
+const twitterAPIBearer = JSON.parse(fs.readFileSync("/home/pi/Hololive/twitterbearer"));
 const identifiers = [
     "hb",
     "holobot",
@@ -13,7 +14,7 @@ const identifiers = [
 var bot = require('./botapi.js');
 var fileCache = {};
 fileCache['commands'] = [];
-fileCache['ids'] = []
+fileCache['ids'] = [];
 var bootloaderData;
 exports.token = null;
 exports.name = "HolodexBot";
@@ -236,7 +237,10 @@ async function processCommand(command, message) {
                 setTimeout(function(){bot.sendReply(message.chat.id, ("https://youtu.be/" + holodexData[livestreamIndex].id), message.message_id)}, 300);
             }
             break;
-        
+        case 8:
+            let twitterData = await bot.getTweets(twitterAPIBearer, fileCache['ids'][command.command_data].twitter_id, 3)
+            bot.sendMessage(message.chat.id, twitterData.toString())
+            break;
         //Hardcoded commands
         //Help
         case 257:
