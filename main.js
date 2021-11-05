@@ -15,10 +15,12 @@ var bot = require('./botapi.js');
 var fileCache = {};
 fileCache['commands'] = [];
 fileCache['ids'] = [];
+fileCache['tweets'] = [];
 var bootloaderData;
 exports.token = null;
 exports.name = "HolodexBot";
 exports.directory = "";
+var intervalsActive = [];
 
 function loadCommands() {
     fileCache['commands'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/commands.json'));
@@ -238,8 +240,8 @@ async function processCommand(command, message) {
             }
             break;
         case 8:
-            let twitterData = await bot.getTweets(twitterAPIBearer, fileCache['ids'][command.command_data].twitter_id, 3)
-            bot.sendMessage(message.chat.id, twitterData.toString())
+            let twitterData = await bot.getTweets(twitterAPIBearer, fileCache['ids'][command.command_data].twitter_id, 3);
+            bot.sendMessage(message.chat.id, twitterData.toString());
             break;
         //Hardcoded commands
         //Help
@@ -253,8 +255,39 @@ async function processCommand(command, message) {
 		case 262://Uptime
             doUptime(message);
             break;
+        case 263://Clears all intervals
+            for (let i = 0; i < intervalsActive.length; i++) {
+                clearInterval(intervalsActive[i]);
+            }
+            bot.sendReply(message.chat_id, "All intervals cleared", message.message_id);
+            break;
         default:
             console.error("Somehow there's a command of unknown type");
             break;
     }
 }
+
+async function checkForNewTweets(twitterId, chatId) {
+    var latestTweet = await bot.getTweets(twitterAPIBearer, twitterId, 3);
+    for (let i = 0; i < fileCache['tweets'].length; i++) {
+        if (fileCache['tweets'][i]['uid'] == twitterId) {
+            if (fileCache['tweets'][i]['tid'] != latestTweet.data[0].id) {
+                fileCache['tweets'][i]['tid'] = latestTweet.data[0].id;
+                let tweetLink = "https://twitter.com/i/web/status/" + latestTweet.data[0].id;
+                bot.sendMessage(chatId, tweetLink);
+            }
+            return;
+        }
+    }
+    var tweetToPush = {};
+    tweetToPush['uid'] = twitterId;
+    tweetToPush['tid'] = latestTweet.data[0].id;
+    fileCache['tweets'].push(tweetToPush);
+    return;
+}
+
+function startTimedFunctions() {
+    checkForNewTweets("1363705980261855232", "-1001156677558");
+}
+
+startTimedFunctions();

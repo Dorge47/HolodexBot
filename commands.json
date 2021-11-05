@@ -409,4 +409,10 @@
         "tweetrys"
     ],
     "command_data": 43
+}, {
+    "requires_admin": true,
+    "command_type": 263,
+    "command_names": [
+        "clear intervals"
+    ]
 }]
