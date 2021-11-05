@@ -281,13 +281,14 @@ async function checkForNewTweets(twitterId, chatId) {
     }
     var tweetToPush = {};
     tweetToPush['uid'] = twitterId;
+    console.log(latestTweet);
     tweetToPush['tid'] = latestTweet.data[0].id;
     fileCache['tweets'].push(tweetToPush);
     return;
 }
 
 function startTimedFunctions() {
-    checkForNewTweets("1363705980261855232", "-1001156677558");
+    intervalsActive.push(setInterval(checkForNewTweets("1363705980261855232", "-1001156677558"), 180000));
 }
 
 startTimedFunctions();
