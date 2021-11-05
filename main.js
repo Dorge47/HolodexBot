@@ -268,7 +268,8 @@ async function processCommand(command, message) {
 }
 
 async function checkForNewTweets(twitterId, chatId) {
-    var latestTweet = await bot.getTweets(twitterAPIBearer, twitterId, 3);
+    var latestTweetRaw = await bot.getTweets(twitterAPIBearer, twitterId, 3);
+    var latestTweet = JSON.parse(latestTweetRaw);
     for (let i = 0; i < fileCache['tweets'].length; i++) {
         if (fileCache['tweets'][i]['uid'] == twitterId) {
             if (fileCache['tweets'][i]['tid'] != latestTweet.data[0].id) {
