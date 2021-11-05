@@ -288,7 +288,9 @@ async function checkForNewTweets(twitterId, chatId) {
 }
 
 function startTimedFunctions() {
-    intervalsActive.push(setInterval(checkForNewTweets("1363705980261855232", "-1001156677558"), 180000));
+    intervalsActive.push(setInterval(function() {
+        checkForNewTweets("1363705980261855232", "-1001156677558");
+    }, 180000));
 }
 
 startTimedFunctions();
