@@ -290,7 +290,7 @@ async function checkForNewTweets(twitterId, chatId) {
 
 function startTimedFunctions() {
     intervalsActive.push(setInterval(function() {
-        checkForNewTweets("1363705980261855232", "-1001156677558");
+        checkForNewTweets("1363705980261855232", FUJI.toString());
     }, 180000));
 }
 
