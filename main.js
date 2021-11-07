@@ -1,7 +1,8 @@
 var fs = require('fs');
-const DORGE = 440753792;
-const FUJI = 532735068;
-const DEBUGCHANNEL = -1001397346553;
+const DORGE = "440753792";
+const FUJI = "532735068";
+const DEBUGCHANNEL = "-1001397346553";
+const SGN = "-1001156677558";
 const admins = [DORGE];
 const holoAPIKey = JSON.parse(fs.readFileSync("/home/pi/Hololive/apikey"));
 const twitterAPIBearer = JSON.parse(fs.readFileSync("/home/pi/Hololive/twitterbearer"));
@@ -22,12 +23,14 @@ exports.name = "HolodexBot";
 exports.directory = "";
 var intervalsActive = [];
 
-function loadCommands() {
+function loadFileCache() {
     fileCache['commands'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/commands.json'));
+    fileCache['ids'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/HoloIDs.json'));
+    fileCache['tweets'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/tweets.json'))
 }
 
-function loadIDs() {
-    fileCache['ids'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/HoloIDs.json'));
+function writeTweets() {
+    fs.writeFileSync("./" + exports.directory + '/tweets.json', JSON.stringify(fileCache['tweets']));
 }
 
 exports.init = function(initData) {
@@ -35,8 +38,7 @@ exports.init = function(initData) {
     bootloaderData.initBotFunc(exports.directory);
     bot.setToken(exports.token);
     bot.sendMessage(DEBUGCHANNEL, "HolodexBot is ON");
-    loadCommands();
-    loadIDs();
+    loadFileCache();
 }
 
 function forHolodexBot(msg) {
@@ -179,6 +181,9 @@ function shutdown(msg) {
 }
 
 exports.onKill = function() {
+    for (let i = 0; i < intervalsActive.length; i++) {
+        clearInterval(intervalsActive[i]);
+    }
     bot.sendMessage(shutdownChatId, "I'm die, thank you forever", shutdownReplyId);
     bot.sendMessage(DEBUGCHANNEL, "HolodexBot is OFF");
 }
@@ -239,17 +244,13 @@ async function processCommand(command, message) {
                 setTimeout(function(){bot.sendReply(message.chat.id, ("https://youtu.be/" + holodexData[livestreamIndex].id), message.message_id)}, 300);
             }
             break;
-        case 8:
-            let twitterData = await bot.getTweets(twitterAPIBearer, fileCache['ids'][command.command_data].twitter_id, 3);
-            bot.sendMessage(message.chat.id, twitterData.toString());
-            break;
         //Hardcoded commands
         //Help
         case 257:
             shutdown(message);
             break;
-        case 260://Refreshes the command list so we don't have to restart the bot
-            loadCommands();
+        case 260://Refreshes the file cache so we don't have to restart the bot
+            loadFileCache();
             bot.sendReply(message.chat.id, command.command_data.replyText, message.message_id);
             break;
 		case 262://Uptime
@@ -259,7 +260,7 @@ async function processCommand(command, message) {
             for (let i = 0; i < intervalsActive.length; i++) {
                 clearInterval(intervalsActive[i]);
             }
-            bot.sendReply(message.chat_id, "All intervals cleared", message.message_id);
+            bot.sendReply(message.chat.id, "All intervals cleared", message.message_id);
             break;
         default:
             console.error("Somehow there's a command of unknown type");
@@ -274,6 +275,7 @@ async function checkForNewTweets(twitterId, chatId) {
         if (fileCache['tweets'][i]['uid'] == twitterId) {
             if (fileCache['tweets'][i]['tid'] != latestTweet.data[0].id) {
                 fileCache['tweets'][i]['tid'] = latestTweet.data[0].id;
+                writeTweets();
                 let tweetLink = "https://twitter.com/i/web/status/" + latestTweet.data[0].id;
                 bot.sendMessage(chatId, tweetLink);
             }
@@ -285,6 +287,7 @@ async function checkForNewTweets(twitterId, chatId) {
     console.log(latestTweet);
     tweetToPush['tid'] = latestTweet.data[0].id;
     fileCache['tweets'].push(tweetToPush);
+    writeTweets();
     return;
 }
 

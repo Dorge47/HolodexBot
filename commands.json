@@ -21,10 +21,10 @@
     "requires_admin": true,
     "command_type": 260,
     "command_names": [
-        "refresh commands"
+        "refresh json"
     ],
     "command_data": {
-        "replyText": "The command array has been refreshed"
+        "replyText": "The file cache has been refreshed"
     }
 }, {
     "requires_admin": false,
@@ -402,13 +402,6 @@
         "aloe"
     ],
     "command_data": "Salute the fallen."
-}, {
-    "requires_admin": true,
-    "command_type": 8,
-    "command_names": [
-        "tweetrys"
-    ],
-    "command_data": 43
 }, {
     "requires_admin": true,
     "command_type": 263,
