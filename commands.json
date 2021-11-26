@@ -408,4 +408,40 @@
     "command_names": [
         "clear intervals"
     ]
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "darknesss",
+        "darkness"
+	],
+    "command_data": 50
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "lui"
+	],
+    "command_data": 51
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "koyori"
+	],
+    "command_data": 52
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "chloe"
+	],
+    "command_data": 53
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "iroha"
+	],
+    "command_data": 54
 }]
