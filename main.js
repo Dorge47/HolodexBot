@@ -244,6 +244,12 @@ async function processCommand(command, message) {
                 setTimeout(function(){bot.sendReply(message.chat.id, ("https://youtu.be/" + holodexData[livestreamIndex].id), message.message_id)}, 300);
             }
             break;
+        case 8:
+            let timer1 = new Date();
+            let timeToTimer = (new Date("29 November 2021 14:35") - timer1) / 1000;
+            let timerMsg = "There are " + timeToTimer + " seconds until 2:32 PM";
+            bot.sendReply(message.chat.id, timerMsg, message.message_id);
+            break;
         //Hardcoded commands
         //Help
         case 257:

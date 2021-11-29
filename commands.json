@@ -444,4 +444,10 @@
         "iroha"
 	],
     "command_data": 54
+}, {
+    "requires_admin": false,
+    "command_type": 8,
+    "command_names": [
+        "timer test"
+	]
 }]
