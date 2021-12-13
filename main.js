@@ -145,18 +145,11 @@ function processMessage(message) {
     // Check to see if any of the messages match a command
     let messageProcessed = false;
     for (let i = 0; i < fileCache['commands'].length; i++) {
-        for (let lineNums = 0; lineNums < message.text.split(`\n`).length; lineNums++) {
-            var skipLine = false;
-            for (let j = 0; j < fileCache['commands'][i].command_names.length; j++) {
-                if (skipLine) {
-                    // Only process one command per line
-                    break;
-                }
-                if (message.text.toLowerCase().includes(fileCache['commands'][i].command_names[j])) {
-                    processCommand(fileCache['commands'][i], message);
-                    skipLine = true;
-                    messageProcessed = true;
-                }
+        for (let j = 0; j < fileCache['commands'][i].command_names.length; j++) {
+            if (message.text.toLowerCase().includes(fileCache['commands'][i].command_names[j])) {
+                processCommand(fileCache['commands'][i], message);
+                messageProcessed = true;
+                break;//Only process one command per mesage
             }
         }
     }
