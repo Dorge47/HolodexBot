@@ -67,9 +67,11 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "mel"
+        "amelia",
+        "ame",
+        "watson"
 	],
-    "command_data": 42
+    "command_data": 5
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -336,11 +338,9 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "amelia",
-        "ame",
-        "watson"
+        "mel"
 	],
-    "command_data": 5
+    "command_data": 42
 }, {
     "requires_admin": false,
     "command_type": 7,
