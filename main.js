@@ -354,7 +354,8 @@ async function processUpcomingStreams(channelID) {
             else {
                 let timeUntilStream = new Date(holodexData.available_at) - new Date();
                 let announceTimeout = setTimeout(function(){announceStream(holodexData[i].id, channelID)}, timeUntilStream);
-                console.log("Set timer for announcement, " + timeUntilStream " milliseconds remaining");
+                let debugMsg = "Set timer for announcement, " + timeUntilStream " milliseconds remaining";
+                console.log(debugMsg);
                 timeoutsActive.push(announceTimeout);
                 announcementTimeouts.push([announceTimeout, holodexData[i].id]);
             }
