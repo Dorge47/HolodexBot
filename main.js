@@ -342,6 +342,7 @@ async function processUpcomingStreams(channelID) {
         }
         if (!streamProcessed) {
             if (holodexData[i].status == "live") {
+                console.log("Found stream with status: live");
                 let streamerName = "";
                 for (let i = 0; i < fileCache['ids'].length; i++) {
                     if (fileCache['ids'][i].id == channelID) {
@@ -353,6 +354,7 @@ async function processUpcomingStreams(channelID) {
             else {
                 let timeUntilStream = new Date(holodexData.available_at) - new Date();
                 let announceTimeout = setTimeout(function(){announceStream(holodexData[i].id, channelID)}, timeUntilStream);
+                console.log("Set timer for announcement, " + timeUntilStream " milliseconds remaining");
                 timeoutsActive.push(announceTimeout);
                 announcementTimeouts.push([announceTimeout, holodexData[i].id]);
             }
