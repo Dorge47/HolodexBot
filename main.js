@@ -2,6 +2,7 @@ var fs = require('fs');
 const DORGE = "440753792";
 const FUJI = "532735068";
 const DEBUGCHANNEL = "-1001397346553";
+const ANNOUNCECHANNEL = "-1001239173779";
 const SGN = "-1001156677558";
 const admins = [DORGE];
 const holoAPIKey = JSON.parse(fs.readFileSync("/home/pi/Hololive/apikey"));
@@ -17,20 +18,29 @@ var fileCache = {};
 fileCache['commands'] = [];
 fileCache['ids'] = [];
 fileCache['tweets'] = [];
+fileCache['streams'] = [];
 var bootloaderData;
 exports.token = null;
 exports.name = "HolodexBot";
 exports.directory = "";
 var intervalsActive = [];
+var timeoutsActive = [];
+var currentLoopTimeout;
+var announcementTimeouts = [];
 
 function loadFileCache() {
     fileCache['commands'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/commands.json'));
     fileCache['ids'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/HoloIDs.json'));
-    fileCache['tweets'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/tweets.json'))
+    fileCache['tweets'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/tweets.json'));
+    fileCache['streams'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/streams.json'));
 }
 
 function writeTweets() {
     fs.writeFileSync("./" + exports.directory + '/tweets.json', JSON.stringify(fileCache['tweets']));
+}
+
+function writeStreams() {
+    fs.writeFileSync("./" + exports.directory + '/streams.json', JSON.stringify(fileCache['streams']));
 }
 
 exports.init = function(initData) {
@@ -182,6 +192,9 @@ exports.onKill = function() {
     for (let i = 0; i < intervalsActive.length; i++) {
         clearInterval(intervalsActive[i]);
     }
+    for (let i = 0; i < timeoutsActive.length; i++) {
+        clearTimeout(timeoutsActive[i]);
+    }
     bot.sendMessage(shutdownChatId, "I'm die, thank you forever", shutdownReplyId);
     bot.sendMessage(DEBUGCHANNEL, "HolodexBot is OFF");
 }
@@ -218,7 +231,7 @@ async function processCommand(command, message) {
         case 7:
             let memberData = fileCache['ids'][command.command_data];
             let holoDat = await bot.getFutureVids(holoAPIKey, memberData.id, true);
-            holodexData = JSON.parse(holoDat);
+            let holodexData = JSON.parse(holoDat);
             if (holodexData.length == 0) {
                 bot.sendReply(message.chat.id, (memberData.name + " has no streams scheduled right now."), message.message_id);
                 break;
@@ -254,11 +267,20 @@ async function processCommand(command, message) {
 		case 262://Uptime
             doUptime(message);
             break;
-        case 263://Clears all intervals
+        case 263://Clears all intervals and timeouts
             for (let i = 0; i < intervalsActive.length; i++) {
                 clearInterval(intervalsActive[i]);
             }
-            bot.sendReply(message.chat.id, "All intervals cleared", message.message_id);
+            for (let i = 0; i < timeoutsActive.length; i++) {
+                clearTimeout(timeoutsActive[i]);
+            }
+            setTimeout(function(){
+                intervalsActive = [];
+                timeoutsActive = [];
+                currentLoopTimeout = "";
+                announcementTimeouts = [];
+            }, 3000);
+            bot.sendReply(message.chat.id, "All intervals and timeouts cleared", message.message_id);
             break;
         default:
             console.error("Somehow there's a command of unknown type");
@@ -289,10 +311,71 @@ async function checkForNewTweets(twitterId, chatId) {
     return;
 }
 
+function announceStream(timeoutToClear, channelId) {
+    let streamerName = "";
+    for (let i = 0; i < fileCache['ids'].length; i++) {
+        if (fileCache['ids'][i].id == channelId) {
+            streamerName = fileCache['ids'][i].name;
+        }
+    }
+    bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + timeoutToClear));
+    for (let i = 0; i < announcementTimeouts.length; i++) {
+        if (announcementTimeouts[i][1] == timeoutToClear) {
+            clearTimeout(announcementTimeouts[i][0]);
+            timeoutsActive = timeoutsActive.filter(timeout => timeout != announcementTimeouts[i][0]);
+            announcementTimeouts = announcementTimeouts.filter(timeout => timeout[0] != announcementTimeouts[i][0]);
+            return;
+        }
+    }
+}
+
+async function processUpcomingStreams(channelID) {
+    let holoDat = await bot.getFutureVids(holoAPIKey, channelID, true);
+    let holodexData = JSON.parse(holoDat);
+    for (let i = 0; i < holodexData.length; i++) {
+        let streamProcessed = false;
+        for (let j = 0; j < fileCache['streams'].length; j++) {
+            if (fileCache['streams'][j].id == holodexData[i].id) {
+                streamProcessed = true;
+                break;
+            }
+        }
+        if (!streamProcessed) {
+            if (holodexData[i].status == "live") {
+                let streamerName = "";
+                for (let i = 0; i < fileCache['ids'].length; i++) {
+                    if (fileCache['ids'][i].id == channelID) {
+                        streamerName = fileCache['ids'][i].name;
+                    }
+                }
+                bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + holodexData[i].id));
+            }
+            else {
+                let timeUntilStream = new Date(holodexData.available_at) - new Date();
+                let announceTimeout = setTimeout(function(){announceStream(holodexData[i].id, channelID)}, timeUntilStream);
+                timeoutsActive.push(announceTimeout);
+                announcementTimeouts.push([announceTimeout, holodexData[i].id]);
+            }
+            fileCache['streams'].push(holodexData[i]);
+        }
+    }
+    writeStreams();
+}
+
+function livestreamLoop(currentID) {
+    timeoutsActive = timeoutsActive.filter(timeout => timeout != currentLoopTimeout) // Remove currentLoopTimeout from timeoutsActive
+    processUpcomingStreams(currentID);
+    var nextID = (currentID == 54) ? 0 : (currentID + 1);
+    currentLoopTimeout = setTimeout(function(){livestreamLoop(nextID)}, 300000);
+    timeoutsActive.push(currentLoopTimeout);
+}
+
 function startTimedFunctions() {
     intervalsActive.push(setInterval(function() {
         checkForNewTweets("1363705980261855232", FUJI.toString());
     }, 180000));
+    currentLoopTimeout = setTimeout(function(){livestreamLoop(0)}, 5000);
+    timeoutsActive.push(currentLoopTimeout);
 }
 
 startTimedFunctions();
