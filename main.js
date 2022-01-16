@@ -298,6 +298,17 @@ async function processCommand(command, message) {
             }, 3000);
             bot.sendReply(message.chat.id, "All intervals and timeouts cleared", message.message_id);
             break;
+        case 264:
+            let tempArr = fileCache['streams'];
+            for (let i = tempArr.length - 1; i >= 0; i--) {
+                let timeUntilStream = new Date(tempArr[i].available_at) - new Date();
+                if (timeUntilStream < 0) {
+                    tempArr.splice(i,1);
+                }
+            }
+            fileCache['streams'] = tempArr;
+            bot.sendReply(message.chat.id, "Stream array pruned", message.message_id);
+            break;
         default:
             console.error("Somehow there's a command of unknown type");
             break;
@@ -340,8 +351,6 @@ function announceStream(timeoutToClear, channelId) {
             clearTimeout(announcementTimeouts[i][0]);
             timeoutsActive = timeoutsActive.filter(timeout => timeout != announcementTimeouts[i][0]);
             announcementTimeouts.splice(i,1);
-            fileCache['streams'] = fileCache['streams'].filter(streamData => streamData.id != timeoutToClear);
-            writeStreams();
             return;
         }
     }
@@ -351,6 +360,9 @@ async function processUpcomingStreams(channelID) {
     let holoDat = await bot.getFutureVids(holoAPIKey, channelID, true);
     let holodexData = JSON.parse(holoDat);
     for (let i = 0; i < holodexData.length; i++) {
+        if (holodexData[i].status == "live") {
+            continue;
+        }
         let streamProcessed = false;
         for (let j = 0; j < fileCache['streams'].length; j++) {
             if (fileCache['streams'][j].id == holodexData[i].id) {
@@ -359,24 +371,12 @@ async function processUpcomingStreams(channelID) {
             }
         }
         if (!streamProcessed) {
-            if (holodexData[i].status == "live") {
-                console.log("Found stream with status: live");
-                let streamerName = "";
-                for (let i = 0; i < fileCache['ids'].length; i++) {
-                    if (fileCache['ids'][i].id == channelID) {
-                        streamerName = fileCache['ids'][i].name;
-                    }
-                }
-                bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + holodexData[i].id));
-            }
-            else {
-                let timeUntilStream = new Date(holodexData[i].available_at) - new Date();
-                let announceTimeout = setTimeout(function(){announceStream(holodexData[i].id, channelID)}, timeUntilStream);
-                let debugMsg = "Set timer for announcement, " + timeUntilStream + " milliseconds remaining";
-                console.log(debugMsg);
-                timeoutsActive.push(announceTimeout);
-                announcementTimeouts.push([announceTimeout, holodexData[i].id]);
-            }
+            let timeUntilStream = new Date(holodexData[i].available_at) - new Date();
+            let announceTimeout = setTimeout(function(){announceStream(holodexData[i].id, channelID)}, timeUntilStream);
+            let debugMsg = "Set timer for announcement, " + timeUntilStream + " milliseconds remaining";
+            console.log(debugMsg);
+            timeoutsActive.push(announceTimeout);
+            announcementTimeouts.push([announceTimeout, holodexData[i].id]);
             fileCache['streams'].push(holodexData[i]);
         }
     }

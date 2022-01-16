@@ -444,4 +444,10 @@
         "iroha"
 	],
     "command_data": 54
+}, {
+    "requires_admin": true,
+    "command_type": 264,
+    "command_names": [
+        "prune"
+    ]
 }]
