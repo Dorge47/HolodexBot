@@ -363,10 +363,11 @@ async function processUpcomingStreams(channelID) {
 }
 
 function livestreamLoop(currentID) {
+    console.log("Processing id " + currentID);
     timeoutsActive = timeoutsActive.filter(timeout => timeout != currentLoopTimeout) // Remove currentLoopTimeout from timeoutsActive
-    processUpcomingStreams(currentID);
+    processUpcomingStreams(fileCache['ids'][currentID].id);
     var nextID = (currentID == 54) ? 0 : (currentID + 1);
-    currentLoopTimeout = setTimeout(function(){livestreamLoop(nextID)}, 300000);
+    currentLoopTimeout = setTimeout(function(){livestreamLoop(nextID)}, 30000);
     timeoutsActive.push(currentLoopTimeout);
 }
 
@@ -374,7 +375,7 @@ function startTimedFunctions() {
     intervalsActive.push(setInterval(function() {
         checkForNewTweets("1363705980261855232", FUJI.toString());
     }, 180000));
-    currentLoopTimeout = setTimeout(function(){livestreamLoop(0)}, 5000);
+    currentLoopTimeout = setTimeout(function(){livestreamLoop(48)}, 5000);
     timeoutsActive.push(currentLoopTimeout);
 }
 
