@@ -51,7 +51,7 @@ exports.init = function(initData) {
     bot.sendMessage(DEBUGCHANNEL, "HolodexBot is ON");
     loadFileCache();
     setTimeout(function() {
-        for (let i = fileCache['streams'].length - 1; i <= 0; i--) {
+        for (let i = fileCache['streams'].length - 1; i >= 0; i--) {
             let timeUntilStream = new Date(fileCache['streams'][i].available_at) - new Date();
             if (timeUntilStream > 0) {
                 let announceTimeout = setTimeout(function(){announceStream(fileCache['streams'][i].id, fileCache['streams'][i].channel.id)}, timeUntilStream);
