@@ -352,7 +352,7 @@ async function processUpcomingStreams(channelID) {
                 bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + holodexData[i].id));
             }
             else {
-                let timeUntilStream = new Date(holodexData.available_at) - new Date();
+                let timeUntilStream = new Date(holodexData[i].available_at) - new Date();
                 let announceTimeout = setTimeout(function(){announceStream(holodexData[i].id, channelID)}, timeUntilStream);
                 let debugMsg = "Set timer for announcement, " + timeUntilStream + " milliseconds remaining";
                 console.log(debugMsg);
