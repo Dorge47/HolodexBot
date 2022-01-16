@@ -27,6 +27,7 @@ var intervalsActive = [];
 var timeoutsActive = [];
 var currentLoopTimeout;
 var announcementTimeouts = [];
+var initLoop = true;
 
 function loadFileCache() {
     fileCache['commands'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/commands.json'));
@@ -49,6 +50,21 @@ exports.init = function(initData) {
     bot.setToken(exports.token);
     bot.sendMessage(DEBUGCHANNEL, "HolodexBot is ON");
     loadFileCache();
+    setTimeout(function() {
+        for (let i = fileCache['streams'].length - 1; i <= 0; i--) {
+            let timeUntilStream = new Date(fileCache['streams'][i].available_at) - new Date();
+            if (timeUntilStream > 0) {
+                let announceTimeout = setTimeout(function(){announceStream(fileCache['streams'][i].id, fileCache['streams'][i].channel.id)}, timeUntilStream);
+                let debugMsg = "Set timer for announcement, " + timeUntilStream + " milliseconds remaining";
+                console.log(debugMsg);
+                timeoutsActive.push(announceTimeout);
+                announcementTimeouts.push([announceTimeout, fileCache['streams'][i].id]);
+            }
+            else {
+                fileCache['streams'].splice(i,1);
+            }
+        }
+    }, 5000);
 }
 
 function forHolodexBot(msg) {
@@ -323,7 +339,9 @@ function announceStream(timeoutToClear, channelId) {
         if (announcementTimeouts[i][1] == timeoutToClear) {
             clearTimeout(announcementTimeouts[i][0]);
             timeoutsActive = timeoutsActive.filter(timeout => timeout != announcementTimeouts[i][0]);
-            announcementTimeouts = announcementTimeouts.filter(timeout => timeout[0] != announcementTimeouts[i][0]);
+            announcementTimeouts.splice(i,1);
+            fileCache['streams'] = fileCache['streams'].filter(streamData => streamData.id != timeoutToClear);
+            writeStreams();
             return;
         }
     }
@@ -366,11 +384,13 @@ async function processUpcomingStreams(channelID) {
 }
 
 function livestreamLoop(currentID) {
-    console.log("Processing id " + currentID);
     timeoutsActive = timeoutsActive.filter(timeout => timeout != currentLoopTimeout) // Remove currentLoopTimeout from timeoutsActive
     processUpcomingStreams(fileCache['ids'][currentID].id);
     var nextID = (currentID == 54) ? 0 : (currentID + 1);
-    currentLoopTimeout = setTimeout(function(){livestreamLoop(nextID)}, 30000);
+    if (initLoop && !nextID) {
+        initLoop = false;
+    }
+    currentLoopTimeout = setTimeout(function(){livestreamLoop(nextID)}, initLoop ? 30000 : 60000);
     timeoutsActive.push(currentLoopTimeout);
 }
 
@@ -378,7 +398,7 @@ function startTimedFunctions() {
     intervalsActive.push(setInterval(function() {
         checkForNewTweets("1363705980261855232", FUJI.toString());
     }, 180000));
-    currentLoopTimeout = setTimeout(function(){livestreamLoop(48)}, 5000);
+    currentLoopTimeout = setTimeout(function(){livestreamLoop(0)}, 15000);
     timeoutsActive.push(currentLoopTimeout);
 }
 
