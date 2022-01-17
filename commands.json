@@ -67,9 +67,7 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "amelia",
-        "ame",
-        "watson"
+        "mel"
 	],
     "command_data": 5
 }, {
@@ -338,7 +336,9 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "mel"
+        "amelia",
+        "ame",
+        "watson"
 	],
     "command_data": 42
 }, {
@@ -388,13 +388,6 @@
     "command_data": 48
 }, {
     "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "uto"
-	],
-    "command_data": 49
-}, {
-    "requires_admin": false,
     "command_type": 0,
     "command_names": [
         "coco",
@@ -415,33 +408,40 @@
         "darknesss",
         "darkness"
 	],
-    "command_data": 50
+    "command_data": 49
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "lui"
 	],
-    "command_data": 51
+    "command_data": 50
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "koyori"
 	],
-    "command_data": 52
+    "command_data": 51
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "chloe"
 	],
-    "command_data": 53
+    "command_data": 52
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "iroha"
+	],
+    "command_data": 53
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "uto"
 	],
     "command_data": 54
 }, {

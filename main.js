@@ -55,7 +55,7 @@ exports.init = function(initData) {
             let timeUntilStream = new Date(fileCache['streams'][i].available_at) - new Date();
             if (timeUntilStream > 0) {
                 let announceTimeout = setTimeout(function(){announceStream(fileCache['streams'][i].id, fileCache['streams'][i].channel.id)}, timeUntilStream);
-                let debugMsg = "Set timer for announcement, " + timeUntilStream + " milliseconds remaining";
+                let debugMsg = "Set timer for announcement of " + fileCache['streams'][i].id + ", " + timeUntilStream + " milliseconds remaining";
                 console.log(debugMsg);
                 timeoutsActive.push(announceTimeout);
                 announcementTimeouts.push([announceTimeout, fileCache['streams'][i].id]);
@@ -65,12 +65,16 @@ exports.init = function(initData) {
             }
         }
     }, 5000);
+    writeStreams();
 }
 
-function forHolodexBot(msg) {
+function forHolodexBot(msg,removeIdentifier) {
     for (let i = 0; i < identifiers.length; i++) {
         if (msg.text.toLowerCase().includes(identifiers[i])) {
             if (msg.text.toLowerCase().indexOf(identifiers[i]) == 0) {
+                if (removeIdentifier) {
+                    return msg.slice(identifiers[i].length + 1);
+                }
                 return true;
             }
         }
@@ -163,23 +167,21 @@ function processMessage(message) {
         return;
     }
     // Determine whether we need to acknowledge the message
-    if (!forHolodexBot(message)) {
+    if (!forHolodexBot(message,false)) {
         // Check for pekofy
         pekofy(message);
         return;
     }
     // Check to see if any of the messages match a command
     let messageProcessed = false;
-    let commandFound = false;
     for (let i = 0; i < fileCache['commands'].length; i++) {
-        if (commandFound) {
+        if (messageProcessed) {
             break;
         }
         for (let j = 0; j < fileCache['commands'][i].command_names.length; j++) {
-            if (message.text.toLowerCase().includes(fileCache['commands'][i].command_names[j])) {
+            if (forHolodexBot(message.text.toLowerCase(),true) == fileCache['commands'][i].command_names[j]) {
                 processCommand(fileCache['commands'][i], message);
                 messageProcessed = true;
-                commandFound = true;
                 break;
             }
         }
@@ -205,10 +207,10 @@ function shutdown(msg) {
 }
 
 exports.onKill = function() {
-    for (let i = 0; i < intervalsActive.length; i++) {
+    for (let i = intervalsActive.length - 1; i >= 0; i--) {
         clearInterval(intervalsActive[i]);
     }
-    for (let i = 0; i < timeoutsActive.length; i++) {
+    for (let i = timeoutsActive.length - 1; i >= 0 ; i--) {
         clearTimeout(timeoutsActive[i]);
     }
     bot.sendMessage(shutdownChatId, "I'm die, thank you forever", shutdownReplyId);
@@ -307,12 +309,40 @@ async function processCommand(command, message) {
                 }
             }
             fileCache['streams'] = tempArr;
+            writeStreams();
             bot.sendReply(message.chat.id, "Stream array pruned", message.message_id);
             break;
         default:
             console.error("Somehow there's a command of unknown type");
             break;
     }
+}
+
+function clearTimeoutsManually(identifier, method) {
+    switch (method) {
+        case "streamID":
+            for (let i = announcementTimeouts.length - 1; i >= 0; i--) {
+                if (announcementTimeouts[i][1] == identifier) {
+                    clearTimeout(announcementTimeouts[i][0]);
+                    timeoutsActive = timeoutsActive.filter(timeout => timeout != announcementTimeouts[i][0]);
+                    announcementTimeouts.splice(i,1);
+                }
+            }
+            break;
+        default:
+            console.error("clearTimeoutsManually() called with unknown method: " + method);
+            break;
+    }
+    console.log("Timeout with " + method + ": " + identifier + " cleared successfully");
+}
+
+function getNameFromChannelID(channelID) {
+    for (let i = 0; i < fileCache['ids'].length; i++) {
+        if (fileCache['ids'][i].id == channelID) {
+            return fileCache['ids'][i].name;
+        }
+    }
+    console.error("fileCache['ids'] contains no entry with id: " + channelID);
 }
 
 async function checkForNewTweets(twitterId, chatId) {
@@ -338,22 +368,17 @@ async function checkForNewTweets(twitterId, chatId) {
     return;
 }
 
-function announceStream(timeoutToClear, channelId) {
-    let streamerName = "";
-    for (let i = 0; i < fileCache['ids'].length; i++) {
-        if (fileCache['ids'][i].id == channelId) {
-            streamerName = fileCache['ids'][i].name;
-        }
+async function announceStream(streamId, channelId) {
+    let streamDat = await bot.getVideoById(streamId);
+    let streamData = JSON.parse(streamDat);
+    let streamerName = getNameFromChannelID(channelId);
+    if (streamData.status == "missing") {
+        console.error(streamerName + " cancelled stream with ID: " + streamId + ", skipping announcement");
     }
-    bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + timeoutToClear));
-    for (let i = 0; i < announcementTimeouts.length; i++) {
-        if (announcementTimeouts[i][1] == timeoutToClear) {
-            clearTimeout(announcementTimeouts[i][0]);
-            timeoutsActive = timeoutsActive.filter(timeout => timeout != announcementTimeouts[i][0]);
-            announcementTimeouts.splice(i,1);
-            return;
-        }
+    else {
+        bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
     }
+    clearTimeoutsManually(streamId, "streamID");
 }
 
 async function processUpcomingStreams(channelID) {
@@ -364,16 +389,32 @@ async function processUpcomingStreams(channelID) {
             continue;
         }
         let streamProcessed = false;
-        for (let j = 0; j < fileCache['streams'].length; j++) {
+        for (let j = fileCache['streams'].length - 1; j >= 0; j--) {
             if (fileCache['streams'][j].id == holodexData[i].id) {
                 streamProcessed = true;
+                if (fileCache['streams'][j].available_at != holodexData[i].available_at) {
+                    let timeUntilStream = new Date(holodexData[i].available_at) - new Date();
+                    if (timeUntilStream < 0) {
+                        console.error("Stream with ID: " + holodexData[i].id + " already started, skipping announcement");
+                        fileCache['streams'].splice(j,1);
+                    }
+                    else {
+                        clearTimeoutsManually(holodexData[i].id, "streamID");
+                        let announceTimeout = setTimeout(function(){announceStream(holodexData[i].id, channelID)}, timeUntilStream);
+                        let debugMsg = "Rectified timer for announcement of " + holodexData[i].id + ", " + timeUntilStream + " milliseconds remaining";
+                        console.log(debugMsg);
+                        timeoutsActive.push(announceTimeout);
+                        announcementTimeouts.push([announceTimeout, holodexData[i].id]);
+                        fileCache['streams'][j] = holodexData[i];
+                    }
+                }
                 break;
             }
         }
         if (!streamProcessed) {
             let timeUntilStream = new Date(holodexData[i].available_at) - new Date();
             let announceTimeout = setTimeout(function(){announceStream(holodexData[i].id, channelID)}, timeUntilStream);
-            let debugMsg = "Set timer for announcement, " + timeUntilStream + " milliseconds remaining";
+            let debugMsg = "Set timer for announcement of " + holodexData[i].id + ", " + timeUntilStream + " milliseconds remaining";
             console.log(debugMsg);
             timeoutsActive.push(announceTimeout);
             announcementTimeouts.push([announceTimeout, holodexData[i].id]);
@@ -386,7 +427,7 @@ async function processUpcomingStreams(channelID) {
 function livestreamLoop(currentID) {
     timeoutsActive = timeoutsActive.filter(timeout => timeout != currentLoopTimeout) // Remove currentLoopTimeout from timeoutsActive
     processUpcomingStreams(fileCache['ids'][currentID].id);
-    var nextID = (currentID == 54) ? 0 : (currentID + 1);
+    var nextID = (currentID == 53) ? 0 : (currentID + 1);
     if (initLoop && !nextID) {
         initLoop = false;
     }

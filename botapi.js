@@ -143,6 +143,17 @@ exports.getFutureVids = function(apiKey, channelId, excludeWaitingRooms) {
     });
 }
 
+exports.getVideoById = function(apiKey, videoId) {
+    var apiRequest = {
+        "id": videoId
+    }
+    return new Promise(function(resolve) {
+        sendHolodexRequest("videos", apiKey, apiRequest, function(data) {
+            resolve(data);
+        });
+    });
+}
+
 exports.getTweets = function(apiKey, twitterId, exclusions) {
     var apiRequest = {
         "max_results": 5
