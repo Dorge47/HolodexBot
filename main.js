@@ -379,6 +379,11 @@ async function announceStream(streamId, channelId) {
         bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
     }
     clearTimeoutsManually(streamId, "streamID");
+    for (let i = fileCache['streams'].length - 1; i >= 0; i--) {
+        if (fileCache['streams'].id == streamId) {
+            fileCache['streams'].splice(i,1);
+        }
+    }
 }
 
 async function processUpcomingStreams(channelID) {
