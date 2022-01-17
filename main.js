@@ -369,7 +369,7 @@ async function checkForNewTweets(twitterId, chatId) {
 }
 
 async function announceStream(streamId, channelId) {
-    let streamDat = await bot.getVideoById(streamId);
+    let streamDat = await bot.getVideoById(holoAPIKey, streamId);
     let streamData = JSON.parse(streamDat);
     let streamerName = getNameFromChannelID(channelId);
     if (streamData.status == "missing") {
