@@ -179,7 +179,7 @@ function processMessage(message) {
             break;
         }
         for (let j = 0; j < fileCache['commands'][i].command_names.length; j++) {
-            if (forHolodexBot(message.text.toLowerCase(),true) == fileCache['commands'][i].command_names[j]) {
+            if (forHolodexBot(message,true) == fileCache['commands'][i].command_names[j]) {
                 processCommand(fileCache['commands'][i], message);
                 messageProcessed = true;
                 break;
