@@ -73,7 +73,7 @@ function forHolodexBot(msg,removeIdentifier) {
         if (msg.text.toLowerCase().includes(identifiers[i])) {
             if (msg.text.toLowerCase().indexOf(identifiers[i]) == 0) {
                 if (removeIdentifier) {
-                    return msg.text.slice(identifiers[i].length + 1);
+                    return msg.text.toLowerCase().slice(identifiers[i].length + 1);
                 }
                 return true;
             }
