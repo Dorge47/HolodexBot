@@ -54,7 +54,7 @@ exports.init = function(initData) {
         for (let i = fileCache['streams'].length - 1; i >= 0; i--) {
             let timeUntilStream = new Date(fileCache['streams'][i].available_at) - new Date();
             if (timeUntilStream > 0) {
-                let announceTimeout = setTimeout(function(){announceStream(fileCache['streams'][i].id, fileCache['streams'][i].channel.id)}, timeUntilStream);
+                let announceTimeout = setTimeout(announceStream, timeUntilStream, fileCache['streams'][i].id, fileCache['streams'][i].channel.id);
                 let debugMsg = "Set timer for announcement of " + fileCache['streams'][i].id + ", " + timeUntilStream + " milliseconds remaining";
                 console.log(debugMsg);
                 timeoutsActive.push(announceTimeout);
@@ -266,11 +266,11 @@ async function processCommand(command, message) {
             }
             if (!currentlyLive) {
                 bot.sendReply(message.chat.id, (memberData.name + " has " + holodexData.length + " upcoming " + ((holodexData.length - 1) ? "streams. Here's the first one:" : "stream. Here it is:")), message.message_id);
-                setTimeout(function(){bot.sendReply(message.chat.id, ("https://youtu.be/" + holodexData[0].id), message.message_id)}, 300);
+                setTimeout(bot.sendReply, 300, message.chat.id, ("https://youtu.be/" + holodexData[0].id), message.message_id);
             }
             else {
                 // Delay and list current livestreams
-                setTimeout(function(){bot.sendReply(message.chat.id, ("https://youtu.be/" + holodexData[livestreamIndex].id), message.message_id)}, 300);
+                setTimeout(bot.sendReply, 300, message.chat.id, ("https://youtu.be/" + holodexData[livestreamIndex].id), message.message_id);
             }
             break;
         //Hardcoded commands
@@ -405,7 +405,7 @@ async function processUpcomingStreams(channelID) {
                     }
                     else {
                         clearTimeoutsManually(holodexData[i].id, "streamID");
-                        let announceTimeout = setTimeout(function(){announceStream(holodexData[i].id, channelID)}, timeUntilStream);
+                        let announceTimeout = setTimeout(announceStream, timeUntilStream, holodexData[i].id, channelID);
                         let debugMsg = "Rectified timer for announcement of " + holodexData[i].id + ", " + timeUntilStream + " milliseconds remaining";
                         console.log(debugMsg);
                         timeoutsActive.push(announceTimeout);
@@ -418,7 +418,7 @@ async function processUpcomingStreams(channelID) {
         }
         if (!streamProcessed) {
             let timeUntilStream = new Date(holodexData[i].available_at) - new Date();
-            let announceTimeout = setTimeout(function(){announceStream(holodexData[i].id, channelID)}, timeUntilStream);
+            let announceTimeout = setTimeout(announceStream, timeUntilStream, holodexData[i].id, channelID);
             let debugMsg = "Set timer for announcement of " + holodexData[i].id + ", " + timeUntilStream + " milliseconds remaining";
             console.log(debugMsg);
             timeoutsActive.push(announceTimeout);
@@ -436,7 +436,7 @@ function livestreamLoop(currentID) {
     if (initLoop && !nextID) {
         initLoop = false;
     }
-    currentLoopTimeout = setTimeout(function(){livestreamLoop(nextID)}, initLoop ? 30000 : 60000);
+    currentLoopTimeout = setTimeout(livestreamLoop, initLoop ? 30000 : 60000, nextID);
     timeoutsActive.push(currentLoopTimeout);
 }
 
@@ -444,7 +444,7 @@ function startTimedFunctions() {
     intervalsActive.push(setInterval(function() {
         checkForNewTweets("1363705980261855232", FUJI.toString());
     }, 180000));
-    currentLoopTimeout = setTimeout(function(){livestreamLoop(0)}, 15000);
+    currentLoopTimeout = setTimeout(livestreamLoop, 15000, 0);
     timeoutsActive.push(currentLoopTimeout);
 }
 
