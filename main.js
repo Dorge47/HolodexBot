@@ -386,18 +386,18 @@ async function announceStream(streamId, channelId) {
     }
     else {
         if (streamData.available_at != cacheData.available_at) {
-            let timeUntilStream = new Date(cacheData.available_at) - new Date();
-            if (timeUntilStream < -60000) {
-                console.error("Stream with ID: " + cacheData.id + " already started, skipping announcement");
+            let timeUntilStream = new Date(streamData.available_at) - new Date();
+            if (timeUntilStream < -300000) {
+                console.error("Stream with ID: " + streamData.id + " started " + (timeUntilStream * -1) + " milliseconds ago, skipping announcement");
             }
-            else if (timeUntilStream > 0) {
-                clearTimeoutsManually(cacheData.id, "streamID");
-                let announceTimeout = setTimeout(announceStream, timeUntilStream, cacheData.id, channelId);
-                let debugMsg = "Rectified timer for announcement of " + cacheData.id + ", " + timeUntilStream + " milliseconds remaining";
+            else if (timeUntilStream > 60000) {
+                clearTimeoutsManually(streamData.id, "streamID");
+                let announceTimeout = setTimeout(announceStream, timeUntilStream, streamData.id, channelId);
+                let debugMsg = "Rectified timer for announcement of " + streamData.id + ", " + timeUntilStream + " milliseconds remaining";
                 console.log(debugMsg);
                 timeoutsActive.push(announceTimeout);
-                announcementTimeouts.push([announceTimeout, cacheData.id]);
-                fileCache['streams'][cacheIndex] = cacheData;
+                announcementTimeouts.push([announceTimeout, streamData.id]);
+                fileCache['streams'][cacheIndex] = streamData;
                 return;
             }
         }
