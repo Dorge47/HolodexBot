@@ -371,19 +371,46 @@ async function checkForNewTweets(twitterId, chatId) {
 async function announceStream(streamId, channelId) {
     let streamDat = await bot.getVideoById(holoAPIKey, streamId);
     let streamData = JSON.parse(streamDat);
+    let cacheIndex;
+    let cacheData;
     let streamerName = getNameFromChannelID(channelId);
+    for (let i = 0; i < fileCache['streams'].length; i++) {
+        if (fileCache['streams'][i].id == streamId) {
+            cacheIndex = i;
+            cacheData = fileCache['streams'][i];
+            break;
+        }
+    }
     if (streamData.status == "missing") {
         console.error(streamerName + " cancelled stream with ID: " + streamId + ", skipping announcement");
     }
     else {
-        bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
-    }
-    clearTimeoutsManually(streamId, "streamID");
-    for (let i = fileCache['streams'].length - 1; i >= 0; i--) {
-        if (fileCache['streams'].id == streamId) {
-            fileCache['streams'].splice(i,1);
+        if (streamData.available_at != cacheData.available_at) {
+            let timeUntilStream = new Date(cacheData.available_at) - new Date();
+            if (timeUntilStream < 0) {
+                console.error("Stream with ID: " + cacheData.id + " already started, skipping announcement");
+            }
+            else {
+                clearTimeoutsManually(cacheData.id, "streamID");
+                let announceTimeout = setTimeout(announceStream, timeUntilStream, cacheData.id, channelId);
+                let debugMsg = "Rectified timer for announcement of " + cacheData.id + ", " + timeUntilStream + " milliseconds remaining";
+                console.log(debugMsg);
+                timeoutsActive.push(announceTimeout);
+                announcementTimeouts.push([announceTimeout, cacheData.id]);
+                fileCache['streams'][cacheIndex] = cacheData;
+                return;
+            }
+        }
+        else {
+            bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
         }
     }
+    clearTimeoutsManually(streamId, "streamID");
+    fileCache['streams'].splice(cacheIndex, 1);
+    /* This is where we would typically call writeStreams(), but it's not
+    uncommon for multiple streams to be announced at the exact same time, so we
+    have to leave the streams.json file out of date. Invoking the prune function
+    is a way to manually update the file */
 }
 
 async function processUpcomingStreams(channelID) {
@@ -398,13 +425,13 @@ async function processUpcomingStreams(channelID) {
             if (fileCache['streams'][j].id == holodexData[i].id) {
                 streamProcessed = true;
                 if (fileCache['streams'][j].available_at != holodexData[i].available_at) {
+                    clearTimeoutsManually(holodexData[i].id, "streamID");
                     let timeUntilStream = new Date(holodexData[i].available_at) - new Date();
                     if (timeUntilStream < 0) {
                         console.error("Stream with ID: " + holodexData[i].id + " already started, skipping announcement");
                         fileCache['streams'].splice(j,1);
                     }
                     else {
-                        clearTimeoutsManually(holodexData[i].id, "streamID");
                         let announceTimeout = setTimeout(announceStream, timeUntilStream, holodexData[i].id, channelID);
                         let debugMsg = "Rectified timer for announcement of " + holodexData[i].id + ", " + timeUntilStream + " milliseconds remaining";
                         console.log(debugMsg);
