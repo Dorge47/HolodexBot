@@ -387,10 +387,10 @@ async function announceStream(streamId, channelId) {
     else {
         if (streamData.available_at != cacheData.available_at) {
             let timeUntilStream = new Date(cacheData.available_at) - new Date();
-            if (timeUntilStream < 0) {
+            if (timeUntilStream < -60000) {
                 console.error("Stream with ID: " + cacheData.id + " already started, skipping announcement");
             }
-            else {
+            else if (timeUntilStream > 0) {
                 clearTimeoutsManually(cacheData.id, "streamID");
                 let announceTimeout = setTimeout(announceStream, timeUntilStream, cacheData.id, channelId);
                 let debugMsg = "Rectified timer for announcement of " + cacheData.id + ", " + timeUntilStream + " milliseconds remaining";
@@ -463,7 +463,7 @@ function livestreamLoop(currentID) {
     if (initLoop && !nextID) {
         initLoop = false;
     }
-    currentLoopTimeout = setTimeout(livestreamLoop, initLoop ? 30000 : 60000, nextID);
+    currentLoopTimeout = setTimeout(livestreamLoop, initLoop ? 10000 : 30000, nextID);
     timeoutsActive.push(currentLoopTimeout);
 }
 
