@@ -400,6 +400,9 @@ async function announceStream(streamId, channelId) {
                 fileCache['streams'][cacheIndex] = streamData;
                 return;
             }
+            else {
+                bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
+            }
         }
         else {
             bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
