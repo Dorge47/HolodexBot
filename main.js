@@ -385,12 +385,12 @@ async function announceStream(streamId, channelId) {
         console.error(streamerName + " cancelled stream with ID: " + streamId + ", skipping announcement");
     }
     else {
-        if (streamData.available_at != cacheData.available_at) {
+        if (streamData.available_at != cacheData.available_at) { // Stream has already started or been rescheduled
             let timeUntilStream = new Date(streamData.available_at) - new Date();
-            if (timeUntilStream < -300000) {
+            if (timeUntilStream < -300000) { // Stream has already started over five minutes ago
                 console.error("Stream with ID: " + streamData.id + " started " + (timeUntilStream * -1) + " milliseconds ago, skipping announcement");
             }
-            else if (timeUntilStream > 60000) {
+            else if (timeUntilStream > 60000) { // Stream has been rescheduled for at least a minute from now
                 clearTimeoutsManually(streamData.id, "streamID");
                 let announceTimeout = setTimeout(announceStream, timeUntilStream, streamData.id, channelId);
                 let debugMsg = "Rectified timer for announcement of " + streamData.id + ", " + timeUntilStream + " milliseconds remaining";
@@ -400,11 +400,11 @@ async function announceStream(streamId, channelId) {
                 fileCache['streams'][cacheIndex] = streamData;
                 return;
             }
-            else {
+            else { // Stream start time has changed, but is between five minutes in the past and one minute in the future
                 bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
             }
         }
-        else {
+        else { // Stream start time unchanged
             bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
         }
     }
