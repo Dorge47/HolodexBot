@@ -370,7 +370,7 @@ async function checkForNewTweets(twitterId, chatId) {
 
 async function announceStream(streamId, channelId) {
     let streamDat = await bot.getVideoById(holoAPIKey, streamId);
-    let streamData = JSON.parse(streamDat);
+    let streamData = JSON.parse(streamDat)[0];
     if (typeof(streamData.id) == "undefined") {
         console.error("StreamId: " + streamId + ", channelId: " + channelId + ", raw JSON: " + JSON.stringify(streamData));
         process.exit();
