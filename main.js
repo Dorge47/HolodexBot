@@ -400,12 +400,32 @@ async function announceStream(streamId, channelId) {
                 fileCache['streams'][cacheIndex] = streamData;
                 return;
             }
-            else { // Stream start time has changed, but is between five minutes in the past and one minute in the future
+            else if (streamData.status == "live") { // Stream start time has changed, but is live now
                 bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
             }
+            else { // Recheck for live in 20 seconds
+                clearTimeoutsManually(streamData.id, "streamID");
+                let announceTimeout = setTimeout(announceStream, 20000, streamData.id, channelId);
+                let debugMsg = "Delaying announcement of " + streamData.id + " for 20 seconds";
+                console.log(debugMsg);
+                timeoutsActive.push(announceTimeout);
+                announcementTimeouts.push([announceTimeout, streamData.id]);
+                fileCache['streams'][cacheIndex] = streamData;
+                return;
+            }
         }
-        else { // Stream start time unchanged
+        else if (streamData.status == "live") { // Stream start time unchanged and live
             bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
+        }
+        else { // Recheck for live in 20 seconds
+            clearTimeoutsManually(streamData.id, "streamID");
+            let announceTimeout = setTimeout(announceStream, 20000, streamData.id, channelId);
+            let debugMsg = "Delaying announcement of " + streamData.id + " for 20 seconds";
+            console.log(debugMsg);
+            timeoutsActive.push(announceTimeout);
+            announcementTimeouts.push([announceTimeout, streamData.id]);
+            fileCache['streams'][cacheIndex] = streamData;
+            return;
         }
     }
     clearTimeoutsManually(streamId, "streamID");
