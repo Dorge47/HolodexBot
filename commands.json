@@ -443,11 +443,32 @@
     "command_names": [
         "uto"
 	],
-    "command_data": 54
+    "command_data": 57
 }, {
     "requires_admin": true,
     "command_type": 264,
     "command_names": [
         "prune"
     ]
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "zeta"
+	],
+    "command_data": 54
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "kaela"
+	],
+    "command_data": 55
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "kobo"
+	],
+    "command_data": 56
 }]

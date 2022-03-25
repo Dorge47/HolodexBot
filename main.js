@@ -486,7 +486,7 @@ async function processUpcomingStreams(channelID) {
 function livestreamLoop(currentID) {
     timeoutsActive = timeoutsActive.filter(timeout => timeout != currentLoopTimeout) // Remove currentLoopTimeout from timeoutsActive
     processUpcomingStreams(fileCache['ids'][currentID].id);
-    var nextID = (currentID == 53) ? 0 : (currentID + 1);
+    var nextID = (currentID == 56) ? 0 : (currentID + 1);
     if (initLoop && !nextID) {
         initLoop = false;
     }
