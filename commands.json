@@ -155,7 +155,8 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "okayu"
+        "okayu",
+        "mogu"
 	],
     "command_data": 16
 }, {
@@ -169,16 +170,10 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "pekora"
+        "pekora",
+        "peko"
 	],
     "command_data": 18
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "rushia"
-	],
-    "command_data": 19
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -220,7 +215,8 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "towa"
+        "towa",
+        "tmt"
 	],
     "command_data": 25
 }, {
@@ -248,7 +244,8 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "botan"
+        "botan",
+        "poi"
 	],
     "command_data": 30
 }, {
@@ -263,7 +260,8 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "risu"
+        "risu",
+        "ayunda"
 	],
     "command_data": 32
 }, {
@@ -307,7 +305,8 @@
     "command_type": 7,
     "command_names": [
         "calli",
-        "callie"
+        "callie",
+        "calliope"
 	],
     "command_data": 38
 }, {
@@ -392,7 +391,8 @@
     "command_names": [
         "coco",
         "kaichou",
-        "aloe"
+        "aloe",
+        "rushia"
     ],
     "command_data": "Salute the fallen."
 }, {
@@ -405,6 +405,7 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
+        "laplus",
         "darknesss",
         "darkness"
 	],
