@@ -439,13 +439,6 @@
 	],
     "command_data": 53
 }, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "uto"
-	],
-    "command_data": 57
-}, {
     "requires_admin": true,
     "command_type": 264,
     "command_names": [
@@ -472,4 +465,148 @@
         "kobo"
 	],
     "command_data": 56
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "pomu"
+	],
+    "command_data": 57
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "elira",
+        "ewiwa"
+	],
+    "command_data": 58
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "finana",
+        "feesh"
+	],
+    "command_data": 59
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "rosemi",
+        "rosemisama",
+        "rosemi-sama"
+	],
+    "command_data": 60
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "petra"
+	],
+    "command_data": 61
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "selen"
+	],
+    "command_data": 62
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "nina"
+	],
+    "command_data": 63
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "millie"
+	],
+    "command_data": 64
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "enna"
+	],
+    "command_data": 65
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "reimu"
+	],
+    "command_data": 66
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "luca"
+	],
+    "command_data": 67
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "shu"
+	],
+    "command_data": 68
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "ike"
+	],
+    "command_data": 69
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "mysta"
+	],
+    "command_data": 70
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "vox"
+	],
+    "command_data": 71
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "sonny"
+	],
+    "command_data": 72
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "uki"
+	],
+    "command_data": 73
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "alban"
+	],
+    "command_data": 74
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "fulgur"
+	],
+    "command_data": 75
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "uto"
+	],
+    "command_data": 76
 }]
