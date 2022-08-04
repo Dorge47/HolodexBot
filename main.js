@@ -68,6 +68,11 @@ exports.init = function(initData) {
             }
         }
     }, 5000);
+    setTimeout(function() {
+        for (let i = 0; i < fileCache['birthdays'].length; i++) {
+            setBirthday(fileCache['birthdays'][i]);
+        };
+    }, 5000);
     intervalsActive.push(setInterval(function() {
         for (let i = 0; i < fileCache['birthdays'].length; i++) {
             setBirthday(fileCache['birthdays'][i]);
