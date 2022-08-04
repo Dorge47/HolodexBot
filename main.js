@@ -511,6 +511,11 @@ function startTimedFunctions() {
 }
 
 function announceBirthday(name, birthday) {
+    for (let i = 0; i < birthdaysPending.length; i++) {
+        if (birthdaysPending[i].name == birthday.name) {
+            birthdaysPending.splice(i,1);
+        };
+    };
     bot.sendMessage(SGN, "It's " + name + "'s birthday!");
     bot.sendMessage(SGN, "🥳");
     setBirthday(birthday);
@@ -522,6 +527,7 @@ function setBirthday(birthday) {
             return;
         };
     };
+    birthdaysPending.push(birthday);
     let currentYear = new Date().getFullYear();
     let comparisonDate = new Date(birthday.month + " " + birthday.date + " " + currentYear);
     if ((comparisonDate - new Date()) < 0) {
@@ -532,6 +538,7 @@ function setBirthday(birthday) {
         return;
     };
     timeoutsActive.push(setTimeout(announceBirthday, timeUntilBirthday, birthday.name, birthday));
+    console.log("Set timer for " + birthday.name + "'s birthday, " + timeUntilBirthday + " milliseconds remaining");
 }
 
 startTimedFunctions();
