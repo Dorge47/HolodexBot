@@ -19,6 +19,7 @@ fileCache['commands'] = [];
 fileCache['ids'] = [];
 fileCache['tweets'] = [];
 fileCache['streams'] = [];
+fileCache['birthdays'] = [];
 var bootloaderData;
 exports.token = null;
 exports.name = "HolodexBot";
@@ -34,6 +35,7 @@ function loadFileCache() {
     fileCache['ids'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/HoloIDs.json'));
     fileCache['tweets'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/tweets.json'));
     fileCache['streams'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/streams.json'));
+    fileCache['birthdays'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/birthdays.json'));
 }
 
 function writeTweets() {
@@ -64,6 +66,11 @@ exports.init = function(initData) {
                 fileCache['streams'].splice(i,1);
             }
         }
+    }, 5000);
+    setTimeout(function() {
+        for (let i = 0; i < fileCache['birthdays'].length; i++) {
+            setBirthday(fileCache['birthdays'][i]);
+        };
     }, 5000);
     writeStreams();
 }
@@ -500,6 +507,22 @@ function startTimedFunctions() {
     }, 180000));
     currentLoopTimeout = setTimeout(livestreamLoop, 15000, 0);
     timeoutsActive.push(currentLoopTimeout);
+}
+
+function announceBirthday(name, birthday) {
+    bot.sendMessage(SGN, "It's " + name + "'s birthday!");
+    bot.sendMessage(SGN, "🥳");
+    setBirthday(birthday);
+}
+
+function setBirthday(birthday) {
+        let currentYear = new Date().getFullYear();
+        let comparisonDate = new Date(birthday.month + " " + birthday.date + " " + currentYear);
+        if ((comparisonDate - new Date()) < 0) {
+            currentYear++;
+        };
+        let timeUntilBirthday = new Date(birthday.month + " " + birthday.date + " " + currentYear) - new Date();
+        timeoutsActive.push(setTimeout(announceBirthday, timeUntilBirthday, birthday.name, birthday));
 }
 
 startTimedFunctions();
