@@ -26,6 +26,7 @@ exports.name = "HolodexBot";
 exports.directory = "";
 var intervalsActive = [];
 var timeoutsActive = [];
+var birthdaysPending = [];
 var currentLoopTimeout;
 var announcementTimeouts = [];
 var initLoop = true;
@@ -67,11 +68,11 @@ exports.init = function(initData) {
             }
         }
     }, 5000);
-    setTimeout(function() {
+    intervalsActive.push(setInterval(function() {
         for (let i = 0; i < fileCache['birthdays'].length; i++) {
             setBirthday(fileCache['birthdays'][i]);
         };
-    }, 5000);
+    }, 2000000000));
     writeStreams();
 }
 
@@ -516,13 +517,21 @@ function announceBirthday(name, birthday) {
 }
 
 function setBirthday(birthday) {
-        let currentYear = new Date().getFullYear();
-        let comparisonDate = new Date(birthday.month + " " + birthday.date + " " + currentYear);
-        if ((comparisonDate - new Date()) < 0) {
-            currentYear++;
+    for (let i = 0; i < birthdaysPending.length; i++) {
+        if (birthdaysPending[i].name == birthday.name) {
+            return;
         };
-        let timeUntilBirthday = new Date(birthday.month + " " + birthday.date + " " + currentYear) - new Date();
-        timeoutsActive.push(setTimeout(announceBirthday, timeUntilBirthday, birthday.name, birthday));
+    };
+    let currentYear = new Date().getFullYear();
+    let comparisonDate = new Date(birthday.month + " " + birthday.date + " " + currentYear);
+    if ((comparisonDate - new Date()) < 0) {
+        currentYear++;
+    };
+    let timeUntilBirthday = new Date(birthday.month + " " + birthday.date + " " + currentYear) - new Date();
+    if (timeUntilBirthday > 2147483647) {
+        return;
+    };
+    timeoutsActive.push(setTimeout(announceBirthday, timeUntilBirthday, birthday.name, birthday));
 }
 
 startTimedFunctions();
