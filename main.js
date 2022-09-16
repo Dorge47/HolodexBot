@@ -28,6 +28,7 @@ var intervalsActive = [];
 var timeoutsActive = [];
 var birthdaysPending = [];
 var currentLoopTimeout;
+var currentBirthdayTimeout;
 var announcementTimeouts = [];
 var initLoop = true;
 
@@ -73,11 +74,6 @@ exports.init = function(initData) {
             setBirthday(fileCache['birthdays'][i]);
         };
     }, 5000);
-    intervalsActive.push(setInterval(function() {
-        for (let i = 0; i < fileCache['birthdays'].length; i++) {
-            setBirthday(fileCache['birthdays'][i]);
-        };
-    }, 2000000000));
     writeStreams();
 }
 
@@ -507,28 +503,40 @@ function livestreamLoop(currentID) {
     timeoutsActive.push(currentLoopTimeout);
 }
 
+function birthdayLoop() {
+    timeoutsActive = timeoutsActive.filter(timeout => timeout != currentBirthdayTimeout)
+    for (let i = 0; i < fileCache['birthdays'].length; i++) {
+        setBirthday(fileCache['birthdays'][i]);
+    };
+    currentBirthdayTimeout = setTimeout(birthdayLoop, 2000000000);
+    timeoutsActive.push(currentBirthdayTimeout);
+}
+
 function startTimedFunctions() {
     intervalsActive.push(setInterval(function() {
         checkForNewTweets("1363705980261855232", FUJI.toString());
     }, 180000));
     currentLoopTimeout = setTimeout(livestreamLoop, 15000, 0);
     timeoutsActive.push(currentLoopTimeout);
+    currentBirthdayTimeout = setTimeout(birthdayLoop, 2000000000);
+    timeoutsActive.push(currentBirthdayTimeout);
 }
 
 function announceBirthday(name, birthday) {
     for (let i = 0; i < birthdaysPending.length; i++) {
         if (birthdaysPending[i].name == birthday.name) {
             birthdaysPending.splice(i,1);
+            console.log("Cleared " + name + "'s birthday for announcement");
         };
     };
     bot.sendMessage(SGN, "It's " + name + "'s birthday!");
     bot.sendMessage(SGN, "🥳");
-    setBirthday(birthday);
 }
 
 function setBirthday(birthday) {
     for (let i = 0; i < birthdaysPending.length; i++) {
         if (birthdaysPending[i].name == birthday.name) {
+            console.log("Birthday for " + birthday.name + " already found, skipping attempt to setBirthday");
             return;
         };
     };
