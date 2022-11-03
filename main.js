@@ -540,7 +540,6 @@ function setBirthday(birthday) {
             return;
         };
     };
-    birthdaysPending.push(birthday);
     let currentYear = new Date().getFullYear();
     let comparisonDate = new Date(birthday.month + " " + birthday.date + " " + currentYear);
     if ((comparisonDate - new Date()) < 0) {
@@ -550,6 +549,7 @@ function setBirthday(birthday) {
     if (timeUntilBirthday > 2147483647) {
         return;
     };
+    birthdaysPending.push(birthday);
     timeoutsActive.push(setTimeout(announceBirthday, timeUntilBirthday, birthday.name, birthday));
     console.log("Set timer for " + birthday.name + "'s birthday, " + timeUntilBirthday + " milliseconds remaining");
 }
