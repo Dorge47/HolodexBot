@@ -6,7 +6,6 @@ const ANNOUNCECHANNEL = "-1001239173779";
 const SGN = "-1001156677558";
 const admins = [DORGE];
 const holoAPIKey = JSON.parse(fs.readFileSync("/home/pi/Hololive/apikey"));
-const twitterAPIBearer = JSON.parse(fs.readFileSync("/home/pi/Hololive/twitterbearer"));
 const identifiers = [
     "hb",
     "holobot",
@@ -17,7 +16,6 @@ var bot = require('./botapi.js');
 var fileCache = {};
 fileCache['commands'] = [];
 fileCache['ids'] = [];
-fileCache['tweets'] = [];
 fileCache['streams'] = [];
 fileCache['birthdays'] = [];
 var bootloaderData;
@@ -35,13 +33,8 @@ var initLoop = true;
 function loadFileCache() {
     fileCache['commands'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/commands.json'));
     fileCache['ids'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/HoloIDs.json'));
-    fileCache['tweets'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/tweets.json'));
     fileCache['streams'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/streams.json'));
     fileCache['birthdays'] = JSON.parse(fs.readFileSync("./" + exports.directory + '/birthdays.json'));
-}
-
-function writeTweets() {
-    fs.writeFileSync("./" + exports.directory + '/tweets.json', JSON.stringify(fileCache['tweets']));
 }
 
 function writeStreams() {
@@ -354,29 +347,6 @@ function getNameFromChannelID(channelID) {
     console.error("fileCache['ids'] contains no entry with id: " + channelID);
 }
 
-async function checkForNewTweets(twitterId, chatId) {
-    var latestTweetRaw = await bot.getTweets(twitterAPIBearer, twitterId, 3);
-    var latestTweet = JSON.parse(latestTweetRaw);
-    for (let i = 0; i < fileCache['tweets'].length; i++) {
-        if (fileCache['tweets'][i]['uid'] == twitterId) {
-            if (fileCache['tweets'][i]['tid'] != latestTweet.data[0].id) {
-                fileCache['tweets'][i]['tid'] = latestTweet.data[0].id;
-                writeTweets();
-                let tweetLink = "https://twitter.com/i/web/status/" + latestTweet.data[0].id;
-                bot.sendMessage(chatId, tweetLink);
-            }
-            return;
-        }
-    }
-    var tweetToPush = {};
-    tweetToPush['uid'] = twitterId;
-    console.log(latestTweet);
-    tweetToPush['tid'] = latestTweet.data[0].id;
-    fileCache['tweets'].push(tweetToPush);
-    writeTweets();
-    return;
-}
-
 async function announceStream(streamId, channelId) {
     let streamDat = await bot.getVideoById(holoAPIKey, streamId);
     let streamData = JSON.parse(streamDat)[0];
@@ -513,9 +483,6 @@ function birthdayLoop() {
 }
 
 function startTimedFunctions() {
-    intervalsActive.push(setInterval(function() {
-        checkForNewTweets("1363705980261855232", FUJI.toString());
-    }, 180000));
     currentLoopTimeout = setTimeout(livestreamLoop, 15000, 0);
     timeoutsActive.push(currentLoopTimeout);
     currentBirthdayTimeout = setTimeout(birthdayLoop, 2000000000);
