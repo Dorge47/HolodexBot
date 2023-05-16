@@ -509,10 +509,31 @@ function setBirthday(birthday) {
     };
     let currentYear = new Date().getFullYear();
     let comparisonDate = new Date(birthday.month + " " + birthday.date + " " + currentYear);
+    let offset = comparisonDate.getTimezoneOffset();
+    switch (birthday.region) {
+        case "en":
+            break;
+        case "jp":
+            comparisonDate = new Date(comparisonDate - 0 - (offset+540)*60000);
+        case "id":
+            comparisonDate = new Date(comparisonDate - 0 - (offset+420)*60000);
+        default:
+            break;
+    };
     if ((comparisonDate - new Date()) < 0) {
         currentYear++;
     };
     let timeUntilBirthday = new Date(birthday.month + " " + birthday.date + " " + currentYear) - new Date();
+    switch (birthday.region) {
+        case "en":
+            break;
+        case "jp":
+            timeUntilBirthday = new Date(timeUntilBirthday - 0 - (offset+540)*60000);
+        case "id":
+            timeUntilBirthday = new Date(timeUntilBirthday - 0 - (offset+420)*60000);
+        default:
+            break;
+    };
     if (timeUntilBirthday > 2147483647) {
         return;
     };
