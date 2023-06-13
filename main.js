@@ -5,7 +5,7 @@ const DEBUGCHANNEL = "-1001397346553";
 const ANNOUNCECHANNEL = "-1001239173779";
 const SGN = "-1001156677558";
 const admins = [DORGE];
-const holoAPIKey = JSON.parse(fs.readFileSync("/home/pi/Hololive/apikey"));
+const holoAPIKey = JSON.parse(fs.readFileSync("/home/nu/Hololive/apikey"));
 const identifiers = [
     "hb",
     "holobot",
