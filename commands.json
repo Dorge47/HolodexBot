@@ -606,7 +606,21 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "uto"
+        "yugo"
 	],
     "command_data": 76
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "aster"
+	],
+    "command_data": 77
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "uto"
+	],
+    "command_data": 78
 }]
