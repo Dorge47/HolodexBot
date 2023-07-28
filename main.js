@@ -253,7 +253,11 @@ async function processCommand(command, message) {
             let holoDat = await bot.getFutureVids(holoAPIKey, memberData.id, true);
             let holodexData = JSON.parse(holoDat);
             if (holodexData.length == 0) {
-                bot.sendReply(message.chat.id, (memberData.name + " has no streams scheduled right now."), message.message_id);
+                let verb = " has ";
+                if (memberData.name == "FUWAMOCO") {
+                    verb = " have ";
+                };
+                bot.sendReply(message.chat.id, (memberData.name + verb + "no streams scheduled right now."), message.message_id);
                 break;
             }
             let currentlyLive = false;
@@ -262,12 +266,20 @@ async function processCommand(command, message) {
                 if (holodexData[i].status == "live") {
                     livestreamIndex = i;
                     currentlyLive = true;
-                    bot.sendReply(message.chat.id, (memberData.name + " is live right now!"), message.message_id);
+                    let verb = " is ";
+                    if (memberData.name == "FUWAMOCO") {
+                        verb = " are ";
+                    };
+                    bot.sendReply(message.chat.id, (memberData.name + verb + "live right now!"), message.message_id);
                     break;
                 }
             }
             if (!currentlyLive) {
-                bot.sendReply(message.chat.id, (memberData.name + " has " + holodexData.length + " upcoming " + ((holodexData.length - 1) ? "streams. Here's the first one:" : "stream. Here it is:")), message.message_id);
+                let verb = " has ";
+                if (memberData.name == "FUWAMOCO") {
+                    verb = " have ";
+                };
+                bot.sendReply(message.chat.id, (memberData.name + verb + holodexData.length + " upcoming " + ((holodexData.length - 1) ? "streams. Here's the first one:" : "stream. Here it is:")), message.message_id);
                 setTimeout(bot.sendReply, 300, message.chat.id, ("https://youtu.be/" + holodexData[0].id), message.message_id);
             }
             else {
@@ -384,7 +396,11 @@ async function announceStream(streamId, channelId) {
                 return;
             }
             else if (streamData.status == "live") { // Stream start time has changed, but is live now
-                bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
+                let verb = " is ";
+                if (streamerName == "FUWAMOCO") {
+                    verb = " are ";
+                };
+                bot.sendMessage(ANNOUNCECHANNEL, (streamerName + verb + "live!\n\nhttps://youtu.be/" + streamId));
             }
             else { // Recheck for live in 20 seconds
                 clearTimeoutsManually(streamData.id, "streamID");
@@ -398,7 +414,11 @@ async function announceStream(streamId, channelId) {
             }
         }
         else if (streamData.status == "live") { // Stream start time unchanged and live
-            bot.sendMessage(ANNOUNCECHANNEL, (streamerName + " is live!\n\nhttps://youtu.be/" + streamId));
+            let verb = " is ";
+            if (streamerName == "FUWAMOCO") {
+                verb = " are ";
+            };
+            bot.sendMessage(ANNOUNCECHANNEL, (streamerName + verb + "live!\n\nhttps://youtu.be/" + streamId));
         }
         else { // Recheck for live in 20 seconds
             clearTimeoutsManually(streamData.id, "streamID");
@@ -465,7 +485,7 @@ async function processUpcomingStreams(channelID) {
 function livestreamLoop(currentID) {
     timeoutsActive = timeoutsActive.filter(timeout => timeout != currentLoopTimeout) // Remove currentLoopTimeout from timeoutsActive
     processUpcomingStreams(fileCache['ids'][currentID].id);
-    var nextID = (currentID == 56) ? 0 : (currentID + 1);
+    var nextID = (currentID == 60) ? 0 : (currentID + 1);
     if (initLoop && !nextID) {
         initLoop = false;
     }
