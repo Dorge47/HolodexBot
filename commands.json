@@ -479,7 +479,8 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "bijou"
+        "bijou",
+        "biboo"
     ],
     "command_data": 58
 }, {
