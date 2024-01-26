@@ -68,13 +68,6 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "mel"
-    ],
-    "command_data": 5
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
         "fubuki",
         "fbk",
         "friend"
@@ -224,7 +217,8 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "luna"
+        "luna",
+        "nanora"
     ],
     "command_data": 26
 }, {
@@ -238,7 +232,8 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "nene"
+        "nene",
+        "nenechi"
     ],
     "command_data": 29
 }, {
@@ -355,8 +350,7 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "fauna",
-        "ceres"
+        "fauna"
     ],
     "command_data": 45
 }, {
@@ -393,7 +387,9 @@
         "sana",
         "nina",
         "mysta",
-        "yugo"
+        "yugo",
+        "mel",
+        "pomu"
     ],
     "command_data": "Salute the fallen."
 }, {
@@ -409,7 +405,8 @@
         "laplus",
         "darknesss",
         "darkness",
-        "la+"
+        "la+",
+        "laplace"
     ],
     "command_data": 49
 }, {
@@ -472,7 +469,7 @@
     "command_type": 7,
     "command_names": [
         "shiori",
-        "novella"
+        "shiorin"
     ],
     "command_data": 57
 }, {
@@ -487,8 +484,7 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "nerissa",
-        "ravencroft"
+        "nerissa"
     ],
     "command_data": 59
 }, {
@@ -535,13 +531,6 @@
         "hajime"
     ],
     "command_data": 65
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "pomu"
-    ],
-    "command_data": 66
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -593,8 +582,7 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "enna",
-        "ennaur"
+        "enna"
     ],
     "command_data": 74
 }, {
