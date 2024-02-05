@@ -501,164 +501,40 @@
     "command_names": [
         "ao"
     ],
-    "command_data": 61
+    "command_data": 62
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "kanade"
     ],
-    "command_data": 62
+    "command_data": 63
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "ririka"
     ],
-    "command_data": 63
+    "command_data": 64
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "raden"
     ],
-    "command_data": 64
+    "command_data": 65
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "hajime"
     ],
-    "command_data": 65
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "elira",
-        "ewiwa"
-    ],
-    "command_data": 67
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "finana",
-        "feesh"
-    ],
-    "command_data": 68
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "rosemi",
-        "rosemisama",
-        "rosemi-sama"
-    ],
-    "command_data": 69
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "petra",
-        "peto"
-    ],
-    "command_data": 70
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "selen"
-    ],
-    "command_data": 71
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "millie"
-    ],
-    "command_data": 73
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "enna"
-    ],
-    "command_data": 74
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "reimu"
-    ],
-    "command_data": 75
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "luca"
-    ],
-    "command_data": 76
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "shu"
-    ],
-    "command_data": 77
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "ike"
-    ],
-    "command_data": 78
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "vox"
-    ],
-    "command_data": 80
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "sonny"
-    ],
-    "command_data": 81
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "uki"
-    ],
-    "command_data": 82
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "alban"
-    ],
-    "command_data": 83
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "fulgur"
-    ],
-    "command_data": 84
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "aster"
-    ],
-    "command_data": 86
+    "command_data": 66
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "uto"
     ],
-    "command_data": 87
+    "command_data": 61
 }]
