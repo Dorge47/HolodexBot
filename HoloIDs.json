@@ -14,9 +14,6 @@
     "name": "AZKi",
     "id": "UC0TXe_LYZ4scaW2XMyi5_kw"
 }, {
-    "name": "Mel",
-    "id": "UCD8HOxPs4Xvsm8H0ZxXGiBw"
-}, {
     "name": "Fubuki",
     "id": "UCdn5BQ06XqgXoAxIhbqw5Rg"
 }, {
@@ -56,9 +53,6 @@
     "name": "Pekora",
     "id": "UC1DCedRgGHBdm81E1llLhOQ"
 }, {
-    "name": "Rushia",
-    "id": "UCl_gCybOJRIgOXw6Qb4qJzQ"
-}, {
     "name": "Flare",
     "id": "UCvInZx9h3jC2JzsIzoOebWg"
 }, {
@@ -80,9 +74,6 @@
     "name": "Luna",
     "id": "UCa9Y57gfeY0Zro_noHRVrnw"
 }, {
-    "name": "Coco",
-    "id": "UCS9uQI-jC3DE0L4IpXyvr6w"
-}, {
     "name": "Lamy",
     "id": "UCFKOVgVbGmX65RxO3EtH3iw"
 }, {
@@ -94,6 +85,36 @@
 }, {
     "name": "Polka",
     "id": "UCK9V2B22uJYu3N7eR_BT9QA"
+}, {
+    "name": "Laplus",
+    "id": "UCENwRMx5Yh42zWpzURebzTw"
+}, {
+    "name": "Lui",
+    "id": "UCs9_O1tRPMQTHQ-N_L6FU2g"
+}, {
+    "name": "Koyori",
+    "id": "UC6eWCld0KwmyHFbAqK3V-Rw"
+}, {
+    "name": "Chloe",
+    "id": "UCIBY1ollUsauvVi4hW4cumw"
+}, {
+    "name": "Iroha",
+    "id": "UC_vMYWcDjmfdpH6r4TTn1MQ"
+}, {
+    "name": "Ao",
+    "id": "UCMGfV7TVTmHhEErVJg1oHBQ"
+}, {
+    "name": "Kanade",
+    "id": "UCWQtYtq9EOB4-I5P-3fh8lA"
+}, {
+    "name": "Ririka",
+    "id": "UCtyWhCj3AqKh2dXctLkDtng"
+}, {
+    "name": "Raden",
+    "id": "UCdXAk5MpyLD8594lm_OvtGQ"
+}, {
+    "name": "Hajime",
+    "id": "UC1iA6_NT4mtAcIII6ygrvCw"
 }, {
     "name": "Risu",
     "id": "UCOyYb1c43VlX9rc_lT6NKQw"
@@ -113,6 +134,15 @@
     "name": "Reine",
     "id": "UChgTyjG-pdNvxxhdsXfHQ5Q"
 }, {
+    "name": "Zeta",
+    "id": "UCTvHWSfBZgtxE4sILOaurIQ"
+}, {
+    "name": "Kaela",
+    "id": "UCZLZ8Jjx_RN2CXloOmgTHVg"
+}, {
+    "name": "Kobo",
+    "id": "UCjLEmnpCNeisMxy134KPwWw"
+}, {
     "name": "Calli",
     "id": "UCL_qhgtOy0dy1Agp8vkySQg"
 }, {
@@ -131,9 +161,6 @@
     "name": "IRyS",
     "id": "UC8rcEBzJSleTkf_-agPM20g"
 }, {
-    "name": "Sana",
-    "id": "UCsUj0dszADCGbF3gNrQEuSQ"
-}, {
     "name": "Fauna",
     "id": "UCO_aKKYxn4tvrqPjcTzZ6EQ"
 }, {
@@ -145,30 +172,6 @@
 }, {
     "name": "Bae",
     "id": "UCgmPnx-EEeOrZSg5Tiw7ZRQ"
-}, {
-    "name": "Laplus",
-    "id": "UCENwRMx5Yh42zWpzURebzTw"
-}, {
-    "name": "Lui",
-    "id": "UCs9_O1tRPMQTHQ-N_L6FU2g"
-}, {
-    "name": "Koyori",
-    "id": "UC6eWCld0KwmyHFbAqK3V-Rw"
-}, {
-    "name": "Chloe",
-    "id": "UCIBY1ollUsauvVi4hW4cumw"
-}, {
-    "name": "Iroha",
-    "id": "UC_vMYWcDjmfdpH6r4TTn1MQ"
-}, {
-    "name": "Zeta",
-    "id": "UCTvHWSfBZgtxE4sILOaurIQ"
-}, {
-    "name": "Kaela",
-    "id": "UCZLZ8Jjx_RN2CXloOmgTHVg"
-}, {
-    "name": "Kobo",
-    "id": "UCjLEmnpCNeisMxy134KPwWw"
 }, {
     "name": "Shiori",
     "id": "UCgnfPPb9JI3e9A4cXHnWbyg"
