@@ -1,2 +1,5 @@
 tweets.json
 streams.json
+.env
+/.vs
+/node_modules

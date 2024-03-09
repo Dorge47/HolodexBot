@@ -1,18 +1,22 @@
 var fs = require('fs');
-const DORGE = "440753792";
-const FUJI = "532735068";
-const DEBUGCHANNEL = "-1001397346553";
-const ANNOUNCECHANNEL = "-1001239173779";
-const SGN = "-1001156677558";
+require('dotenv').config();
+const mariadb = require('mariadb');
+const pool = mariadb.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    connectionLimit: 5,
+    database: process.env.DB_NAME
+});
+const bot = require('./botapi.js');
+const DORGE = process.env.DORGE;
+const FUJI = process.env.FUJI;
+const DEBUGCHANNEL = process.env.DEBUG_CHANNEL;
+const ANNOUNCECHANNEL = process.env.ANNOUNCE_CHANNEL;
+const SGN = process.env.SGN;
 const admins = [DORGE];
-const holoAPIKey = JSON.parse(fs.readFileSync("/home/nu/Hololive/apikey"));
-const identifiers = [
-    "hb",
-    "holobot",
-    "holodexbot",
-    "@holodexbot"
-];
-var bot = require('./botapi.js');
+const holoAPIKey = process.env.HOLODEX_KEY;
+const identifiers = ["hb", "holobot", "holodexbot", "@holodexbot"];
 var fileCache = {};
 fileCache['commands'] = [];
 fileCache['ids'] = [];
