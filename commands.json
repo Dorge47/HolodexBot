@@ -512,6 +512,13 @@
     "command_data": 62
 }, {
     "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "selen"
+    ],
+    "command_data": 63
+}, {
+    "requires_admin": false,
     "command_type": 0,
     "command_names": [
         "aloe",
@@ -524,7 +531,6 @@
         "mysta",
         "mel",
         "pomu",
-        "selen",
         "kyo"
     ],
     "command_data": "Salute the fallen."
