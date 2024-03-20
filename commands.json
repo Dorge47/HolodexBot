@@ -514,6 +514,8 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
+        "dokibird",
+        "doki",
         "selen"
     ],
     "command_data": 63
