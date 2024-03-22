@@ -528,6 +528,13 @@
     "command_data": 64
 }, {
     "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "mono"
+    ],
+    "command_data": 65
+}, {
+    "requires_admin": false,
     "command_type": 0,
     "command_names": [
         "aloe",
