@@ -521,6 +521,13 @@
     "command_data": 63
 }, {
     "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "pippa"
+    ],
+    "command_data": 64
+}, {
+    "requires_admin": false,
     "command_type": 0,
     "command_names": [
         "aloe",
