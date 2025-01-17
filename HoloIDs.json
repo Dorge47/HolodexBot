@@ -26,9 +26,6 @@
     "name": "Haachama",
     "id": "UC1CfXB_kRs3C-zaeTG3oGyg"
 }, {
-    "name": "Aqua",
-    "id": "UC1opHUrw8rvnsadT-iGp7Cg"
-}, {
     "name": "Shion",
     "id": "UCXTpFs_3PqI41qX2d9tL2Rw"
 }, {
@@ -116,6 +113,21 @@
     "name": "Hajime",
     "id": "UC1iA6_NT4mtAcIII6ygrvCw"
 }, {
+    "name": "Riona",
+    "id": "UC9LSiN9hXI55svYEBrrK-tw"
+}, {
+    "name": "Niko",
+    "id": "UCuI_opAVX6qbxZY-a-AxFuQ"
+}, {
+    "name": "Su",
+    "id": "UCjk2nKmHzgH5Xy-C5qYRd5A"
+}, {
+    "name": "Chihaya",
+    "id": "UCKMWFR6lAstLa7Vbf5dH7ig"
+}, {
+    "name": "Vivi",
+    "id": "UCGzTVXqMQHa4AgJVJIVvtDQ"
+}, {
     "name": "Risu",
     "id": "UCOyYb1c43VlX9rc_lT6NKQw"
 }, {
@@ -155,14 +167,8 @@
     "name": "Gura",
     "id": "UCoSrY_IQQVpmIRZ9Xf-y93g"
 }, {
-    "name": "Ame",
-    "id": "UCyl1z3jo3XHR1riLFKG5UAg"
-}, {
     "name": "IRyS",
     "id": "UC8rcEBzJSleTkf_-agPM20g"
-}, {
-    "name": "Fauna",
-    "id": "UCO_aKKYxn4tvrqPjcTzZ6EQ"
 }, {
     "name": "Kronii",
     "id": "UCmbs8T6MWqUHP1tIQvSgKrg"
@@ -196,4 +202,13 @@
 }, {
     "name": "Mono",
     "id": "UCdubotSy4pPOsiaW4MrYn3Q"
+}, {
+    "name": "Mint",
+    "id": "UCcHHkJ98eSfa5aj0mdTwwLQ"
+}, {
+    "name": "Dooby",
+    "id": "UC6T7TJZbW6nO-qsc5coo8Pg"
+}, {
+    "name": "Nimi",
+    "id": "UCIfAvpeIWGHb0duCkMkmm2Q"
 }]
