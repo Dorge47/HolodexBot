@@ -16,7 +16,6 @@ const ANNOUNCECHANNEL = process.env.ANNOUNCE_CHANNEL;
 const SGN = process.env.SGN;
 const admins = [DORGE];
 const holoAPIKey = process.env.HOLODEX_KEY;
-console.log("API Key: " + holoAPIKey);
 const identifiers = ["hb", "holobot", "holodexbot", "@holodexbot"];
 var fileCache = {};
 fileCache['commands'] = [];
