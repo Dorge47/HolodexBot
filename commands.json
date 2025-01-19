@@ -100,19 +100,10 @@
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
-        "aqua",
-        "baqua",
-        "onion"
-    ],
-    "command_data": 9
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
         "shion",
         "garlic"
     ],
-    "command_data": 10
+    "command_data": 9
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -121,14 +112,14 @@
         "yo dayo",
         "yo dazo"
     ],
-    "command_data": 11
+    "command_data": 10
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "choco"
     ],
-    "command_data": 12
+    "command_data": 11
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -137,14 +128,14 @@
         "shuba",
         "duck"
     ],
-    "command_data": 13
+    "command_data": 12
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "mio"
     ],
-    "command_data": 14
+    "command_data": 13
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -152,14 +143,14 @@
         "okayu",
         "mogu"
     ],
-    "command_data": 15
+    "command_data": 14
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "korone"
     ],
-    "command_data": 16
+    "command_data": 15
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -167,14 +158,14 @@
         "pekora",
         "peko"
     ],
-    "command_data": 17
+    "command_data": 16
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "flare"
     ],
-    "command_data": 18
+    "command_data": 17
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -182,7 +173,7 @@
         "noel",
         "danchou"
     ],
-    "command_data": 19
+    "command_data": 18
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -190,21 +181,21 @@
         "marine",
         "senchou"
     ],
-    "command_data": 20
+    "command_data": 19
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "kanata"
     ],
-    "command_data": 21
+    "command_data": 20
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "watame"
     ],
-    "command_data": 22
+    "command_data": 21
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -212,7 +203,7 @@
         "towa",
         "tmt"
     ],
-    "command_data": 23
+    "command_data": 22
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -220,14 +211,14 @@
         "luna",
         "nanora"
     ],
-    "command_data": 24
+    "command_data": 23
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "lamy"
     ],
-    "command_data": 25
+    "command_data": 24
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -235,7 +226,7 @@
         "nene",
         "nenechi"
     ],
-    "command_data": 26
+    "command_data": 25
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -244,7 +235,7 @@
         "poi",
         "shishiron"
     ],
-    "command_data": 27
+    "command_data": 26
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -252,7 +243,7 @@
         "polka",
         "clown"
     ],
-    "command_data": 28
+    "command_data": 27
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -261,72 +252,108 @@
         "darknesss",
         "darkness",
         "la+",
-        "laplace"
+        "laplace",
+        "fourier"
     ],
-    "command_data": 29
+    "command_data": 28
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "lui"
     ],
-    "command_data": 30
+    "command_data": 29
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "koyori"
     ],
-    "command_data": 31
+    "command_data": 30
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "chloe"
     ],
-    "command_data": 32
+    "command_data": 31
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "iroha"
     ],
-    "command_data": 33
+    "command_data": 32
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "ao"
     ],
-    "command_data": 34
+    "command_data": 33
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "kanade"
     ],
-    "command_data": 35
+    "command_data": 34
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "ririka"
     ],
-    "command_data": 36
+    "command_data": 35
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "raden"
     ],
-    "command_data": 37
+    "command_data": 36
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "hajime"
     ],
+    "command_data": 37
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "riona"
+    ],
     "command_data": 38
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "niko"
+    ],
+    "command_data": 39
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "su"
+    ],
+    "command_data": 40
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "chihaya"
+    ],
+    "command_data": 41
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "vivi"
+    ],
+    "command_data": 42
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -334,14 +361,14 @@
         "risu",
         "ayunda"
     ],
-    "command_data": 39
+    "command_data": 43
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "moona"
     ],
-    "command_data": 40
+    "command_data": 44
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -349,49 +376,49 @@
         "iofi",
         "lofi"
     ],
-    "command_data": 41
+    "command_data": 45
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "ollie"
     ],
-    "command_data": 42
+    "command_data": 46
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "anya"
     ],
-    "command_data": 43
+    "command_data": 47
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "reine"
     ],
-    "command_data": 44
+    "command_data": 48
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "zeta"
     ],
-    "command_data": 45
+    "command_data": 49
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "kaela"
     ],
-    "command_data": 46
+    "command_data": 50
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "kobo"
     ],
-    "command_data": 47
+    "command_data": 51
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -400,7 +427,7 @@
         "callie",
         "calliope"
     ],
-    "command_data": 48
+    "command_data": 52
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -408,7 +435,7 @@
         "kiara",
         "tenchou"
     ],
-    "command_data": 49
+    "command_data": 53
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -416,7 +443,7 @@
         "ina",
         "wah"
     ],
-    "command_data": 50
+    "command_data": 54
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -424,44 +451,28 @@
         "gura",
         "gooba"
     ],
-    "command_data": 51
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "amelia",
-        "ame",
-        "watson"
-    ],
-    "command_data": 52
+    "command_data": 55
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "irys"
     ],
-    "command_data": 53
-}, {
-    "requires_admin": false,
-    "command_type": 7,
-    "command_names": [
-        "fauna"
-    ],
-    "command_data": 54
+    "command_data": 56
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "kronii"
     ],
-    "command_data": 55
+    "command_data": 57
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "mumei"
     ],
-    "command_data": 56
+    "command_data": 58
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -470,7 +481,7 @@
         "baelz",
         "hakos"
     ],
-    "command_data": 57
+    "command_data": 59
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -478,7 +489,7 @@
         "shiori",
         "shiorin"
     ],
-    "command_data": 58
+    "command_data": 60
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -486,14 +497,14 @@
         "bijou",
         "biboo"
     ],
-    "command_data": 59
+    "command_data": 61
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "nerissa"
     ],
-    "command_data": 60
+    "command_data": 62
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -502,14 +513,49 @@
         "fuwawa",
         "mococo"
     ],
-    "command_data": 61
+    "command_data": 63
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "elizabeth rose bloodflame",
+        "elizabeth",
+        "liz",
+        "erb"
+    ],
+    "command_data": 64
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "gigi",
+        "gg"
+    ],
+    "command_data": 65
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "cecilia",
+        "ceci",
+        "cc"
+    ],
+    "command_data": 66
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "raora",
+        "car"
+    ],
+    "command_data": 67
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "uto"
     ],
-    "command_data": 62
+    "command_data": 68
 }, {
     "requires_admin": false,
     "command_type": 7,
@@ -518,21 +564,46 @@
         "doki",
         "selen"
     ],
-    "command_data": 63
+    "command_data": 69
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "pippa"
     ],
-    "command_data": 64
+    "command_data": 70
 }, {
     "requires_admin": false,
     "command_type": 7,
     "command_names": [
         "mono"
     ],
-    "command_data": 65
+    "command_data": 71
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "mint",
+        "minto",
+        "minki"
+    ],
+    "command_data": 72
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "dooby",
+        "doobus",
+        "doobius rex"
+    ],
+    "command_data": 73
+}, {
+    "requires_admin": false,
+    "command_type": 7,
+    "command_names": [
+        "nimi"
+    ],
+    "command_data": 74
 }, {
     "requires_admin": false,
     "command_type": 0,
@@ -547,7 +618,11 @@
         "mysta",
         "mel",
         "pomu",
-        "kyo"
+        "kyo",
+        "aqua",
+        "fauna",
+        "ame",
+        "amelia"
     ],
     "command_data": "Salute the fallen."
 }, {
